@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROOT'S BAR Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"
+  src="https://unpkg.com/feather-icons"></script>
+  </script>
+  
+</head>
+<body class="bg-[#0b2a75] font-serif text-white">
+
+  <div class="flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-1/6 bg-[#f] flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-2 p-4">
+          <img src="logo.png" alt="Logo" class="w-10">
+          <h1 class="text-[#1e2b70] font-extrabold text-xl">ROOT'S BAR</h1>
+        </div>
+        <nav class="mt-4 space-y-4">
+          <a href="#" class="block py-3 px-3  text-[#1e2b70] bg-white rounded-r-[13px] font-semibold">Dashboard</a>
+          <a href="#" class="block py-3 px-3  hover:bg-white rounded-r-[13px] hover:text-[#1e2b70] font-semibold">Pesanan</a>
+          <a href="#" class="block py-3 px-3  hover:bg-white rounded-r-[13px] hover:text-[#1e2b70] font-semibold">Manajemen Produk</a>
+        </nav>
+      </div>
+      <button class="m-4 bg-[#d62828] text-white py-2 rounded-full font-semibold hover:bg-[#e63a3a] transition">
+        Logout
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col">
+      <!-- Header -->
+      <header class="flex justify-between items-center p-4 bg-[#0b2a75]">
+        <input type="text" placeholder="Cari" class="rounded-2xl p-2 px-4 text-gray-700 placeholder-gray-400 w-1/3 focus:outline-none">
+        <p class="text-sm font-semibold">Selamat datang, <span class="text-yellow-300">sharleez</span></p>
+      </header>
+
+      <!-- Stats Cards -->
+      <section class="grid grid-cols-3 gap-6 p-6">
+        <div class="bg-green-500 p-4 rounded-2xl text-center">
+          <p class="text-xs font-semibold">Penjualan bulan ini</p>
+          <h2 class="text-2xl font-extrabold">99 Pesanan</h2>
+        </div>
+        <div class="bg-yellow-400 p-4 rounded-2xl text-center text-[#0b2a75]">
+          <p class="text-xs font-semibold">Pendapatan bulan ini
+            <i class="dollar-sign">
+                
+            </i>
+          </p>
+          <h2 class="text-2xl font-extrabold">Rp. 000.000</h2>
+        </div>
+        <div class="bg-red-500 p-4 rounded-2xl text-center">
+          <p class="text-xs font-semibold">Total menu produk</p>
+          <h2 class="text-2xl font-extrabold">10 Menu</h2>
+        </div>
+      </section>
+
+      <!-- Recent Orders -->
+      <section class="px-6">
+        <h3 class="text-xl font-extrabold mb-3">Recent Order</h3>
+        <div class="bg-[#112b8a] rounded-2xl p-4 space-y-2">
+          <div class="grid grid-cols-6 text-sm font-bold border-b border-white pb-2">
+            <span>ID</span>
+            <span>Name</span>
+            <span>Price</span>
+            <span>Date</span>
+            <span>Status</span>
+            <span>Details</span>
+          </div>
+
+          <div class="grid grid-cols-6 items-center text-sm py-2 border-b border-[#2840a5]">
+            <span>#4205</span>
+            <span>Rafid Nawawi</span>
+            <span>Rp. 20.000</span>
+            <span>04/10/2025</span>
+            <span><span class="bg-yellow-400 text-[#0b2a75] px-3 py-1 rounded-full text-xs font-bold">PENDING</span></span>
+            <button class="bg-white text-[#0b2a75] px-3 py-1 rounded-full text-xs font-bold">Lihat Detail</button>
+          </div>
+
+          <div class="grid grid-cols-6 items-center text-sm py-2">
+            <span>#4206</span>
+            <span>Rafid Nawawi</span>
+            <span>Rp. 20.000</span>
+            <span>02/10/2025</span>
+            <span><span class="bg-green-400 text-[#0b2a75] px-3 py-1 rounded-full text-xs font-bold">COMPLETED</span></span>
+            <button class="bg-white text-[#0b2a75] px-3 py-1 rounded-full text-xs font-bold">Lihat Detail</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Checkerboard pattern -->
+      <div class="mt-auto h-6 bg-[length:40px_40px] bg-[repeating-linear-gradient(90deg,#ffffff_0_20px,#0b2a75_20px_40px)]"></div>
+    </main>
+  </div>
+</body>
+</html>
