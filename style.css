@@ -1,0 +1,182 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fff8e5;
+}
+
+/* Navbar button style */
+.nav-btn {
+  background-color: #ffd233;
+  color: #0e1a47;
+  font-weight: 800;
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  padding: 0.5rem 2.9rem;
+  border-radius: 9999px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  transform: translateY(70%);
+}
+
+#navbar {
+  background-color: #ffd233;
+}
+
+/* Bar biru atas */
+.top-bar {
+  background-color: #0b2b68;
+  height: 50px;
+  width: 100%;
+}
+
+/* Navbar kuning */
+nav {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9dd3c;
+  width: fit-content;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: -20px auto 0 auto;
+  border-radius: 50px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  font-size: 22px;
+  color: #0b2b68;
+  height: 55px; /* tinggi navbar tetap */
+  z-index: 99;
+}
+
+nav a {
+  text-decoration: none;
+  color: #0b2b68;
+  margin: 0 25px;
+  transition: transform 0.2s ease;
+  z-index: 1;
+}
+
+nav a:hover {
+  transform: scale(1.1);
+}
+
+/* Logo besar tapi tidak mengubah tinggi navbar */
+.logo {
+  position: absolute;
+  top: 25%;
+  transform: translateY(-50%);
+  width: 80px;
+
+  object-fit: contain;
+  z-index: 2;
+}
+
+/* Supaya link kanan & kiri agak renggang dari logo */
+.left-links {
+  margin-right: 70px;
+}
+
+.right-links {
+  margin-left: 70px;
+}
+
+.nav-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Order button style */
+.order-btn {
+  background-color: #f6d932;
+  color: #102f76;
+  font-weight: 800;
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  padding: 0.6rem 2.5rem;
+  border-radius: 9999px;
+  border: 2px solid #102f76;
+  box-shadow: 0 4px 0 #102f76;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+.order-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 #102f76;
+}
+
+/* Dekorasi posisi */
+.decor-left {
+  z-index: 0;
+}
+.decor-right {
+  z-index: 0;
+}
+
+/* Garis bawah merah di judul */
+.about-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background-color: #e53935;
+}
+
+/* Tombol kuning gaya kartun */
+.order-btn {
+  background-color: #f9dd3c;
+  color: #0b2b68;
+  border: 3px solid #102f76;
+  border-radius: 20px 40px 20px 40px;
+  box-shadow: 0 3px 0 #102f76;
+  text-decoration: none;
+  z-index: 10;
+}
+
+/* Checkerboard bawah */
+.checkerboard {
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+}
+
+.checkerboard div:nth-child(odd) {
+  background: #0b2b68;
+}
+
+.checkerboard div:nth-child(even) {
+  background: #f8f0dc;
+}
+
+/* Responsif */
+@media (max-width: 900px) {
+  .about-title {
+    text-align: center;
+  }
+  .about-section {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.variant-btn {
+  
+  border: 3px solid #f6d932;
+  font-weight: 800;
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  color: #f6d932;
+  position: relative;
+  bottom: 15px;
+} 
+
+.variant-btn:active, .variant-btn:hover {
+  background-color: #f6d932;
+  color: #102f76;
+}
+
+}

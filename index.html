@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ROOT'S BAR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="overflow-x-hidden">
+    <div class="top-bar"></div>
+    <nav>
+      <div class="left-links">
+        <a href="#">HOME</a>
+        <a href="#">ABOUT</a>
+      </div>
+
+      <img src="Properties/logo.png" alt="Logo" class="logo" />
+
+      <div class="right-links">
+        <a href="#">MENU</a>
+        <a href="#">MAPS</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative text-center py-40 bg-[#FFF8E5]">
+      <!-- Dekorasi kiri -->
+      <img
+        src="Properties/Hero_Section/lettuce.png"
+        alt="Lettuce"
+        class="decor-left absolute top-[-20px] left-[-200px] size-[500px] rotate-[-10deg] z-[1]"
+      />
+      <img
+        src="Properties/Hero_section/ham.png"
+        alt="Ham"
+        class="decor-left absolute top-64 left-32 w-64 rotate-[10deg] z-[1]"
+      />
+      <!-- Dekorasi kanan -->
+      <img
+        src="Properties/Hero_Section/cheese.png"
+        alt="Cheese"
+        class="decor-right absolute top-20 w-64 right-6 rotate-[-10deg] z-[1]"
+      />
+      <img
+        src="Properties/Hero_Section/bread.png"
+        alt="Bread"
+        class="decor-right absolute top-64 right-0 w-96 rotate-[5deg] z-[999]"
+      />
+
+      <!-- Konten utama -->
+      <h1
+        class="font-['Playfair_Display'] text-7xl md:text-10xl text-[#102f76] font-extrabold z-[3] relative"
+      >
+        ROOT’S BAR
+      </h1>
+      <p class="text-red-600 text-xl font-medium mt-2">
+        Roti Bakar Khas Bandung
+      </p>
+      <button class="order-btn mt-8 z-[999]">Order Now</button>
+    </section>
+
+    <!-- About Section -->
+    <section
+      class="flex flex-wrap justify-between items-center px-[10%] py-20 relative bg-[#FFF8E5]"
+    >
+      <!-- Text -->
+      <div class="max-w-[50%] min-w-[300px]">
+        <h2 class="text-[48px] font-bold relative mb-6 about-title">
+          About Us
+        </h2>
+
+        <p class="text-[18px] leading-relaxed mb-10">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+        <a
+          href="#"
+          class="order-btn inline-block font-bold text-[22px] px-10 py-3 transition-transform duration-200 hover:scale-105"
+        >
+          Order Now
+        </a>
+      </div>
+
+      <!-- Image -->
+      <div
+        class="relative w-[40%] min-w-[280px] flex justify-center mt-10 lg:mt-0"
+      >
+        <img
+          src="Properties/About_Section/about.png"
+          alt="Sandwich"
+          class="about-image"
+        />
+        <div class="absolute inset-0 translate-x-3 translate-y-3"></div>
+      </div>
+    </section>
+
+    <!-- Checkerboard -->
+    <img
+      src="Properties/About_Section/checkered.png"
+      alt="Checkerboard"
+      class="w-full"
+    />
+
+    <section class="menu bg-[#102f76] text-white text-center py-12">
+      <h1
+        class="text-5xl font-bold text-[#FFF8E5] flex justify- items-center gap-2 pl-[130px]"
+      >
+        Our Menu
+      </h1>
+
+      <img
+        src="Properties/Menu_Section/bintang.png"
+        class="relative w-9 top-[-19px] left-[25%]"
+      />
+      <img
+        src="Properties/Menu_Section/bintang.png"
+        class="relative w-9 top-[-110px] left-[7%]"
+      />
+
+      <div
+        class="menu-nav mt-10 border-t-2 border-b-2 border-yellow-400 w-10/12 mx-auto"
+      >
+        <p class="relative font-bold tracking-wide text-xl pr-[63rem] top-[20px]">PICK A VARIANT</p>
+        <div class="flex justify-center gap-6 flex-wrap bottom-2">
+          <button class="variant-btn active">ASINAN</button>
+          <button class="variant-btn">MANISAN</button>
+          <button class="variant-btn">GOLDEN FIL</button>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-wrap justify-center gap-10 px-6">
+        <!-- Item 1 -->
+        <div class="menu-card">
+          <div class="relative w-[330px]">
+            <img
+              src="Properties/Menu_Section/beef_ham.png"
+              alt="Beef Ham"
+              class="menu-img"
+            />
+            <span class="paperclip"></span>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="menu-card">
+          <div class="relative w-[330px]">
+            <img
+              src="Properties/Menu_Section/choco_choco.png"
+              alt="Choco Choco"
+              class="menu-img"
+            />
+            <span class="paperclip"></span>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="menu-card">
+          <div class="relative w-[330px]">
+            <img
+              src="properties/Menu_Section/beef_patties.png"
+              alt="Beef Patis"
+              class="menu-img"
+            />
+            <span class="paperclip"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
