@@ -1,6 +1,9 @@
 body {
   font-family: "Poppins", sans-serif;
   background-color: #fff8e5;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Navbar button style */
@@ -179,4 +182,14 @@ nav a:hover {
   color: #102f76;
 }
 
-}
+.title-font {
+      font-family: 'Cooper Black', 'Poppins', sans-serif;
+    }
+    /* animasi goyang lembut */
+    .floaty {
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: rotate(-5deg) translateY(0); }
+      50% { transform: rotate(-2deg) translateY(-6px); }
+    }

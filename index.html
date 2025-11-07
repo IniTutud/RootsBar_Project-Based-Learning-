@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ROOT'S BAR</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css"
+    />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@500;600&display=swap"
       rel="stylesheet"
@@ -112,7 +123,7 @@
       class="w-full"
     />
 
-    <section class="menu bg-[#102f76] text-white text-center py-12">
+    <section class="menu bg-[#102F76] text-white text-center py-12">
       <h1
         class="text-5xl font-bold text-[#FFF8E5] flex justify- items-center gap-2 pl-[130px]"
       >
@@ -131,7 +142,11 @@
       <div
         class="menu-nav mt-10 border-t-2 border-b-2 border-yellow-400 w-10/12 mx-auto"
       >
-        <p class="relative font-bold tracking-wide text-xl pr-[63rem] top-[20px]">PICK A VARIANT</p>
+        <p
+          class="relative font-bold tracking-wide text-xl pr-[63rem] top-[20px]"
+        >
+          PICK A VARIANT
+        </p>
         <div class="flex justify-center gap-6 flex-wrap bottom-2">
           <button class="variant-btn active">ASINAN</button>
           <button class="variant-btn">MANISAN</button>
@@ -177,5 +192,465 @@
         </div>
       </div>
     </section>
+    <section class="max-h-[271px] min-h-[271px] bg-[#FFF8E5] mx-auto">
+      <div class="relative mx-auto top-10">
+        <!-- Judul -->
+        <h2
+          class="relative text-[#0a2458] text-5xl font-extrabold tracking-wide mb-8 underline decoration-[#c8161d] underline-offset-4 top-[75px] left-[80px]"
+          style="font-family: 'Cooper Black', 'Poppins', sans-serif"
+        >
+          ORDER VIA
+        </h2>
+
+        <!-- Tombol Platform -->
+        <div class="relative flex gap-8 ml-[440px] bottom-[30px]">
+          <!-- WhatsApp -->
+          <a
+            href="#"
+            class="bg-[#ffde59] hover:bg-[#ffcc33] shadow-md rounded-2xl px-[80px] py-[40px] flex items-center justify-center gap-3 transition-all z-1"
+          >
+            <img
+              src="Properties/Order_Via_Section/whatsapp.png"
+              alt="whatsapp"
+              class="h-10 z-99"
+            />
+          </a>
+
+          <!-- Gojek -->
+          <a
+            href="#"
+            class="bg-[#ffde59] hover:bg-[#ffcc33] shadow-md rounded-2xl px-[40px] py-[40px] flex items-center justify-center gap-3 transition-all"
+          >
+            <img
+              src="Properties/Order_Via_Section/gojek.png"
+              alt="gojek"
+              class="h-10"
+            />
+          </a>
+
+          <!-- Grab -->
+          <a
+            href="#"
+            class="bg-[#ffde59] hover:bg-[#ffcc33] shadow-md rounded-2xl px-[40px] py-[40px] flex items-center justify-center gap-3 transition-all"
+          >
+            <img
+              src="Properties/Order_Via_Section/grab.png"
+              alt="grab"
+              class="h-10"
+            />
+          </a>
+
+          <!-- Shopee -->
+          <a
+            href="#"
+            class="bg-[#ffde59] hover:bg-[#ffcc33] shadow-md rounded-2xl px-[40px] py-[40px] flex items-center justify-center gap-3 transition-all"
+          >
+            <img
+              src="Properties/Order_Via_Section/shopee.png"
+              alt="shopee"
+              class="h-10"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="checker relative w-full bottom-[200px]">
+        <img
+          class=""
+          src="Properties/Order_Via_Section/checkered_3.png"
+          alt=""
+        />
+      </div>
+    </section>
+    <!-- REVIEW & RATING Section -->
+    <section class="bg-[#FFF8E5] py-16 px-6 md:px-20">
+      <h2
+        class="text-[#0a2458] text-4xl md:text-5xl font-extrabold tracking-wide mb-12 underline decoration-[#c8161d] underline-offset-4 text-center"
+        style="font-family: 'Cooper Black', 'Poppins', sans-serif"
+      >
+        REVIEW & RATING
+      </h2>
+
+      <div
+        class="flex flex-col lg:flex-row justify-center items-center gap-12 max-w-6xl mx-auto"
+      >
+        <!-- LEFT: Rating Summary + Graph -->
+        <div
+          class="bg-[#102F76] text-white rounded-[40px] shadow-lg p-8 w-full max-w-[420px] drop-shadow-[0_4px_16px_#0b2b89]"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <p id="avgScore" class="text-5xl font-extrabold leading-none">
+              5.0
+            </p>
+            <div>
+              <div id="avgStars" class="flex gap-1 mb-1">
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+                <span class="text-yellow-400 text-xl">★</span>
+              </div>
+              <p id="reviewCount" class="text-sm text-gray-200">12 Reviews</p>
+            </div>
+          </div>
+
+          <!-- Chart -->
+          <div class="w-full h-48 mt-4">
+            <canvas id="ratingChart"></canvas>
+          </div>
+        </div>
+
+        <!-- RIGHT: Rating Form -->
+        <div
+          class="bg-[#102F76] text-[#fff8e5] rounded-[40px]  p-8 w-full max-w-[420px] drop-shadow-[0_4px_16px_#0b2b89] "
+        >
+          <label class="font-semibold text-lg mb-3 block">Your Rating</label>
+
+          <div
+            id="starContainer"
+            class="flex gap-2 mb-6 text-2xl text-gray-400"
+          >
+            <i class="fa-regular fa-star cursor-pointer border-[1px] border-[#fff8e5] p-2 rounded-[10px] px-4" data-value="1"></i>
+            <i class="fa-regular fa-star cursor-pointer border-[1px] border-[#fff8e5] p-2 rounded-[10px] px-4" data-value="2"></i>
+            <i class="fa-regular fa-star cursor-pointer border-[1px] border-[#fff8e5] p-2 rounded-[10px] px-4" data-value="3"></i>
+            <i class="fa-regular fa-star cursor-pointer border-[1px] border-[#fff8e5] p-2 rounded-[10px] px-4" data-value="4"></i>
+            <i class="fa-regular fa-star cursor-pointer border-[1px] border-[#fff8e5] p-2 rounded-[10px] px-4" data-value="5"></i>
+          </div>
+
+          <label class="font-semibold text-lg mb-2 block">Product Review</label>
+          <textarea
+            id="reviewText"
+            class="w-full rounded-[20px] p-3 text-white resize-none focus:outline-none ring-1 ring-[#fff8e5] bg-black/10"
+            rows="4"
+            placeholder="Write your review here..."
+          ></textarea>
+
+          <button
+            id="submitReview"
+            class="bg-white text-[#0b2b89] font-extrabold px-6 py-2 mt-5 rounded-md shadow hover:bg-[#f6d932] hover:text-[#102f76] transition-all justify-end flex ml-auto"
+          >
+            SUBMIT
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- CUSTOMER REVIEW SECTION -->
+<section class="bg-[#FFF8E5] py-16 px-6 md:px-20">
+  <div class="max-w mx-auto">
+    <div class="flex flex-wrap justify-center gap-1">
+      <!-- CARD 1 -->
+      <div class="bg-[#102F76] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 pb-40 relative"
+        style="transform: rotate(-3deg);">
+        <div class="absolute top-0 left-0 w-full h-6  rounded-t-2xl"></div>
+
+        <div class="mt-6">
+          <div class="flex gap-1 text-yellow-400 mb-2 text-lg">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="text-sm leading-snug mb-6">
+            overall best, the taste, the service. i love it!! 💖🤤
+          </p>
+
+          <div class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/40?img=13" alt="avatar"
+              class="w-8 h-8 rounded-full border-2 border-white" />
+            <div>
+              <p class="text-sm font-semibold">Syaiful Alief</p>
+              <p class="text-xs text-white/70">@Syaifulalief00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="bg-[#0b2b89] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 relative"
+        style="transform: rotate(2deg);">
+        <div class="absolute top-0 left-0 w-full h-6 bg-[repeating-linear-gradient(90deg,#FFF8E5_0_18px,#0b2b89_18px_36px)] rounded-t-2xl"></div>
+
+        <div class="mt-6">
+          <div class="flex gap-1 text-yellow-400 mb-2 text-lg">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="text-sm leading-snug mb-6">The best.</p>
+
+          <div class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/40?img=11" alt="avatar"
+              class="w-8 h-8 rounded-full border-2 border-white" />
+            <div>
+              <p class="text-sm font-semibold">Arvian Fahmi Kusuma</p>
+              <p class="text-xs text-white/70">@Arvianfahmi123</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="bg-[#0b2b89] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 relative"
+        style="transform: rotate(-1.5deg);">
+        <div class="absolute top-0 left-0 w-full h-6  rounded-t-2xl"></div>
+
+        <div class="mt-6">
+          <div class="flex gap-1 text-yellow-400 mb-2 text-lg">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="text-sm leading-snug mb-6">
+            It tastes good and the price is friendly, suitable for eating together. awesome 🙌👌
+          </p>
+
+          <div class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/40?img=32" alt="avatar"
+              class="w-8 h-8 rounded-full border-2 border-white" />
+            <div>
+              <p class="text-sm font-semibold">Dinar Nugroes</p>
+              <p class="text-xs text-white/70">@Dinarnugroes2</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="bg-[#102F76] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 relative "
+        style="transform: rotate(2deg);">
+        <div class="absolute top-0 left-0 w-full h-6 bg-[repeating-linear-gradient(90deg,#FFF8E5_0_18px,#0b2b89_18px_36px)] rounded-t-2xl"></div>
+
+        <div class="mt-6">
+          <div class="flex gap-1 text-yellow-400 mb-2 text-lg">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="text-sm leading-snug mb-6">
+            The taste is different from other toast, with a variety of pickles that make you feel full. Delicious! 😋
+          </p>
+
+          <div class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/40?img=48" alt="avatar"
+              class="w-8 h-8 rounded-full border-2 border-white" />
+            <div>
+              <p class="text-sm font-semibold">Putri Islamiyah</p>
+              <p class="text-xs text-white/70">@Putriislamiyah99</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-20">
+   <div class="checkered">
+  <img src="Properties/location_checker.png" alt="" class="w-[900px] absolute z-1  opacity-[10%] right-0" />
+ </div>
+    <div class="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-2 items-center gap-10">
+
+      <!-- LEFT: MAP -->
+      <div class=" relative flex justify-center items-center">
+        <div class="absolute w-[260px] md:w-[320px] top-5 left-5 rotate-[5deg] bg-[#d6b889] opacity-80 rounded-xl shadow-md"></div>
+
+        <!-- Embed Map utama -->
+        <iframe
+          class="relative w-[260px] md:w-[360px] h-[220px] md:h-[360px]  shadow-lg rotate-[-3deg]"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1408.3264455559622!2d112.76116469305302!3d-7.2724297979295605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb004a5d9043%3A0xd71e162b4d0c0839!2zUm9vdOKAmXMgQmFy!5e1!3m2!1sen!2sid!4v1762404653474!5m2!1sen!2sid"
+          loading="lazy" allowfullscreen>
+        </iframe>
+      </div>
+
+      <!-- RIGHT: TEXT & BUTTON -->
+      <div class="text-center">
+        <div class="bg-[#f9dd3c] text-[#0a2458] title-font text-3xl md:text-4xl font-extrabold px-28 py-3 rounded-full inline-block shadow-md mb-5 inner-shadow relative">
+          Find us at
+        </div>
+
+        <p class="text-[#0a2458] title-font font-semibold text-lg mb-6 relative">
+          Jl. Jojoran Gang 1 No. 20, Surabaya
+        </p>
+
+        <a href="https://maps.app.goo.gl/XXXX" target="_blank"
+           class="bg-[#f9dd3c] text-[#CF1F22] title-font font-extrabold text-sm md:text-base px-6 py-2 rounded-full  shadow-md hover:translate-y-[-2px] hover:bg-[#ffe041] transition-all duration-200 inline-block relative">
+          GET LOCATION
+        </a>
+      </div>
+      <div class="checkered">
+      <img src="Properties/footer_checker.png" alt="Checkerboard" class="w-[900px] absolute z-1  right-0 pt-[80px] opacity-[10%]" />
+    </div>
+    </div>
+  </section>
+  <footer class="bg-[#0b2b68] text-white pt-10 pb-6">
+   
+    <div class="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-10 items-start">
+
+      <!-- LEFT SIDE -->
+      <div>
+        <h3 class="title-font text-2xl font-extrabold mb-1">ROOT’S BAR</h3>
+        <p class="text-white/80 text-sm mb-4">Roti Bakar Khas Bandung</p>
+
+        <!-- Menu Links -->
+        <div class="border-b-2 border-[#d13b3b] w-[400px] mb-4"></div>
+        <ul class="flex flex-col md:flex-row gap-3 text-sm md:gap-6">
+          <li><a href="#home" class="hover:text-[#f9dd3c] transition">Home</a></li>
+          <li><a href="#about" class="hover:text-[#f9dd3c] transition">About</a></li>
+          <li><a href="#menu" class="hover:text-[#f9dd3c] transition">Menu</a></li>
+          <li><a href="#maps" class="hover:text-[#f9dd3c] transition">Maps</a></li>
+        </ul>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="flex flex-col md:items-end gap-4">
+        <!-- Address Bar -->
+        <div class="bg-[#c62828] text-white font-semibold px-4 py-2 rounded-md inline-flex items-center gap-2 shadow-md relative">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Jl. Jojoran Gang 1 No. 20, Surabaya</span>
+        </div>
+
+        <!-- Social Section -->
+        <div class="text-center">
+          <p class="font-bold mb-2">Our Social</p>
+          <div class="flex gap-4 text-xl justify-center ">
+            <a href="#" class="text-[#f9dd3c] hover:text-[#ffffff] transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="text-[#f9dd3c] hover:text-[#ffffff] transition"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checkered">
+      <img src="Properties/checker_3.png" alt="Checkerboard" class="w-[1500px] mt-10" />
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="">
+      <p class="text-center text-white/70 text-xs mt-4">
+        Copyright © 2025 cocinar o ser cocinado
+      </p>
+    </div>
+  </footer>
+
+
+
+   
+   
+
+    <script>
+      // ===== INITIAL RATING DATA =====
+      let ratingCounts = [1, 2, 3, 4, 57]; // ★ → ★★★★★★
+      let totalReviews = ratingCounts.reduce((a, b) => a + b, 0);
+      let totalStars = ratingCounts.reduce(
+        (sum, count, i) => sum + count * (i + 1),
+        0
+      );
+
+      // ===== CHART SETUP =====
+      const ctx = document.getElementById("ratingChart").getContext("2d");
+      const ratingChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["★", "★★", "★★★", "★★★★", "★★★★★"],
+          datasets: [
+            {
+              data: ratingCounts,
+              backgroundColor: "#ffffff",
+              borderRadius: 8,
+              barPercentage: 0.6,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: {
+                color: "#FFD700",
+                font: { size: 14, weight: "bold" },
+              },
+            },
+            y: {
+              grid: { color: "rgba(255,255,255,0.2)" },
+              ticks: {
+                color: "#ffffff",
+                stepSize: 4,
+              },
+            },
+          },
+          plugins: { legend: { display: false } },
+        },
+      });
+
+      // ===== UPDATE AVERAGE DISPLAY =====
+      function updateAverage() {
+        totalReviews = ratingCounts.reduce((a, b) => a + b, 0);
+        totalStars = ratingCounts.reduce(
+          (sum, count, i) => sum + count * (i + 1),
+          0
+        );
+        const avg = totalStars / totalReviews;
+        document.getElementById("avgScore").textContent = avg.toFixed(1);
+        document.getElementById("reviewCount").textContent =
+          totalReviews + " Reviews";
+
+        // update stars
+        const starContainer = document.getElementById("avgStars");
+        starContainer.innerHTML = "";
+        for (let i = 1; i <= 5; i++) {
+          const star = document.createElement("span");
+          star.textContent = "★";
+          star.classList.add(
+            i <= Math.round(avg) ? "text-yellow-400" : "text-gray-400",
+            "text-xl"
+          );
+          starContainer.appendChild(star);
+        }
+      }
+
+      updateAverage();
+
+      // ===== STAR RATING FORM =====
+      const stars = document.querySelectorAll("#starContainer i");
+      let selectedStars = 0;
+
+      stars.forEach((star) => {
+        star.addEventListener("mouseover", () => {
+          const val = parseInt(star.dataset.value);
+          highlightStars(val);
+        });
+        star.addEventListener("mouseleave", () => {
+          highlightStars(selectedStars);
+        });
+        star.addEventListener("click", () => {
+          selectedStars = parseInt(star.dataset.value);
+          highlightStars(selectedStars);
+        });
+      });
+
+      function highlightStars(count) {
+        stars.forEach((s, i) => {
+          if (i < count) {
+            s.classList.remove("fa-regular", "text-gray-400");
+            s.classList.add("fa-solid", "text-yellow-400");
+          } else {
+            s.classList.remove("fa-solid", "text-yellow-400");
+            s.classList.add("fa-regular", "text-gray-400");
+          }
+        });
+      }
+
+      // ===== SUBMIT BUTTON =====
+      document.getElementById("submitReview").addEventListener("click", () => {
+        const review = document.getElementById("reviewText").value.trim();
+        if (selectedStars === 0)
+          return alert("Please select your star rating!");
+        if (review === "") return alert("Please write a review first!");
+
+        // increase chart data
+        ratingCounts[selectedStars - 1]++;
+        ratingChart.data.datasets[0].data = ratingCounts;
+        ratingChart.update();
+
+        // update average rating & count
+        updateAverage();
+
+        // reset form
+        selectedStars = 0;
+        highlightStars(0);
+        document.getElementById("reviewText").value = "";
+
+        alert("Thank you for your feedback!");
+      });
+    </script>
   </body>
 </html>
