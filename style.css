@@ -3,6 +3,11 @@ html {
   user-select: none;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   background-color: #fff8e5;
@@ -483,7 +488,7 @@ input[type=checkbox] {
   bottom: 15px;
 } 
 
-.variant-btn:active, .variant-btn:hover {
+.variant-btn.active, .variant-btn:hover {
   background-color: #F6D932;
   color: #102f76;
 }
