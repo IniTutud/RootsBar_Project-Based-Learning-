@@ -131,6 +131,49 @@
       class="w-full"
     />
 
+    <div id="menuPopup" class="menu-popup">
+      <div class="menu-content card-style">
+        <span class="close" onclick="toggleMenuPopup()">&times;</span>
+        <div class="menu-detail">
+          <div class="menu-popUp-img">
+            <img id="popupImg" src="" alt="Menu Image" class="popup-img">
+          </div>
+          <div class="menu-popUp-desc text-center relative">
+            <div id="popupTitle" class="title-container text-3xl font-bold"></div>
+
+            <div class="relative star-wrapper">
+              <img
+                src="Properties/Menu_Section/bintang.png"
+                class="absolute w-9 star-1"
+              />
+              <img
+                src="Properties/Menu_Section/bintang.png"
+                class="absolute w-9 star-2"
+              />
+            </div>
+
+            <p id="popupDesc" class="description popupDesc text-[#FFFFFF]"></p>
+
+            <div class="ingredients-title mt-4 ingredients-title">Ingredients</div>
+
+            <div id="popupIngredients" class="ingredients-list"></div>
+
+            <button class="add-cart-btn" onclick="addToCart()">Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="cartNotif" class="notification" role="alert" aria-live="assertive">
+      <div class="notification-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" >
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      <div class="notification-text"></div>
+      <button class="close-button" aria-label="Close notification" onclick="this.parentElement.style.display='none';">&times;</button>
+    </div>
+
     <section id="menu" class="menu bg-[#102F76] text-white text-center py-12">
       <h1
         class="text-5xl font-bold text-[#FFF8E5] flex justify- items-center gap-2 pl-[130px] no-copy"
@@ -190,7 +233,7 @@
             </thead>
 
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>
                   <label class="custom-checkbox">
                     <input
@@ -248,7 +291,7 @@
                 <td class="jumlah" style="text-align: center">1</td>
                 <td class="subtotal" style="text-align: right">Rp.21,000</td>
                 <td class="remove"><span class="remove-item">×</span></td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
 
@@ -256,7 +299,7 @@
             <label class="custom-checkbox">
               <input type="checkbox" id="select-all" />
               <span class="checkmark"></span>
-              PILIH SEMUA PRODUK <span class="small-grey">(3)</span>
+              PILIH SEMUA PRODUK <span class="small-grey">(0)</span>
             </label>
           </div>
 
@@ -886,15 +929,55 @@
 
       const menuData = {
         ASINAN: [
-          { img: "Properties/Menu_Section/beef_ham.png" },
-          { img: "Properties/Menu_Section/beef_patties.png" },
+          { img: "Properties/Menu_Section/beef_ham.png", 
+            popupImg: "Properties/Menu_Section/beef_ham_popup.png", 
+            name: "Beef Ham", price: 15000, 
+            description: "Roti Bakar Beef Ham adalah roti bakar premium yang diisi dengan irisan daging sapi asap (beef ham), keju leleh, dan saus spesial. Untuk menciptakan rasa yang lezat dan khas, Roti Bakar Beef Ham dibuat dari bahan-bahan pilihan berkualitas tinggi.",
+            ingredients: [
+              "Properties/Ingredients/bread.png",
+              "Properties/Ingredients/ham.png",
+              "Properties/Ingredients/lettuce.png"
+            ]
+          },
+
+          { img: "Properties/Menu_Section/beef_patties.png", 
+            popupImg: "Properties/Menu_Section/beef_patties_popup.png", 
+            name: "Beef + Pattis", price: 21000,
+            description: "Rasa Beef + Patties adalah roti panggang gurih berisi daging beef lembut dan patties yang padat. Kamu mendapatkan perpaduan keju leleh dan saus yang menambah rasa. Isian dagingnya memberi pengalaman makan yang mantap dan cocok untuk kamu yang ingin pilihan roti panggang yang lebih mengenyangkan.",
+            ingredients: [
+              "Properties/Ingredients/bread.png",
+              "Properties/Ingredients/ham.png",
+              "Properties/Ingredients/lettuce.png",
+              "Properties/Ingredients/beef.png"
+            ] 
+          },
         ],
-        MANISAN: [{ img: "Properties/Menu_Section/choco_choco.png" }],
+        
+        MANISAN: [
+          { img: "Properties/Menu_Section/choco_choco.png", 
+          popupImg: "Properties/Menu_Section/choco_choco_popup.png", 
+          name: "Choco + Choco", price: 20000,
+          description: "Rasa Choco + Choco adalah roti panggang manis dengan olesan cokelat lembut dan tambahan cokelat tebal yang membuat rasanya kaya. Kamu merasakan roti yang hangat dengan tekstur renyah dan aroma cokelat yang kuat. Roti ini cocok untuk kamu yang ingin sajian manis dengan cita rasa cokelat ganda.",
+            ingredients: [
+              "Properties/Ingredients/bread.png",
+              "Properties/Ingredients/choco.png",
+              "Properties/Ingredients/chocos.png"
+            ]
+         }
+        ],
+
         "GOLDEN FIL": [
           {
-            img: "Properties/Menu_Section/beef_patties.png",
-            name: "Beef Sausage",
-            price: "27K",
+            img: "Properties/Menu_Section/beef_patties.png", 
+            popupImg: "Properties/Menu_Section/beef_patties_popup.png", 
+            name: "Beef Sausage", price: "27K",
+            description: "Rasa Beef + Patties adalah roti panggang gurih berisi daging beef lembut dan patties yang padat. Kamu mendapatkan perpaduan keju leleh dan saus yang menambah rasa. Isian dagingnya memberi pengalaman makan yang mantap dan cocok untuk kamu yang ingin pilihan roti panggang yang lebih mengenyangkan.",
+            ingredients: [
+              "Properties/Ingredients/bread.png",
+              "Properties/Ingredients/lettuce.png",
+              "Properties/Ingredients/ham.png",
+              "Properties/Ingredients/beef.png"
+            ]
           },
         ],
       };
@@ -934,9 +1017,138 @@
         });
       });
 
+      function renderMenu(category) {
+        const items = menuData[category];
+        menuList.innerHTML = items
+          .map(
+            (item) => `
+            <div class="menu-card hover-bounce" onclick='toggleMenuPopup(true, ${JSON.stringify(item)})'>
+              <div class="relative w-[330px]">
+                <img src="${item.img}" alt="${item.name}" class="menu-img" />
+                <span class="paperclip"></span>
+              </div>
+            </div>
+          `
+          )
+          .join("");
+      }
+
+      renderMenu("ASINAN");
+
+
+      function toggleMenuPopup(show = false, item = null) {
+        const popup = document.getElementById("menuPopup");
+
+        if (show && item) {
+        let price = item.price;
+        if (typeof price === "string" && price.includes("K")) {
+        price = parseInt(price.replace("K", "")) * 1000;
+        }
+
+          document.getElementById("popupImg").src = item.popupImg || item.img;
+          document.getElementById("popupTitle").textContent = item.name;
+          document.getElementById("popupDesc").textContent = item.description;
+
+          const popupBox = document.getElementById("menuPopup");
+          popupBox.dataset.name = item.name;
+          popupBox.dataset.price = price;
+
+          const ingContainer = document.getElementById("popupIngredients");
+          ingContainer.innerHTML = item.ingredients
+            .map(src => `<div class="ingredient-item"><img src="${src}"></div>`)
+            .join("");
+
+          setTimeout(() => {
+            const title = document.getElementById("popupTitle");
+            const h = title.offsetHeight;
+
+            const starone = document.querySelector(".star-1");
+            const startwo = document.querySelector(".star-2");
+
+            starone.style.top = h - 75 + "px";
+            startwo.style.top = h - 130 + "px";
+          }, 30);
+
+          popup.style.display = "flex";
+            } else {
+          popup.style.display = "none";
+          }
+          }
+
+
+
+      function addToCart() {
+        const popup = document.getElementById("menuPopup");
+        const name = popup.dataset.name;
+        const price = parseInt(popup.dataset.price);
+
+        const tbody = document.querySelector("#cartPopup tbody");
+
+        const existingRow = Array.from(tbody.querySelectorAll("tr")).find(row =>
+          row.querySelector("label").textContent.trim() === name
+        );
+
+        if (existingRow) {
+          const qtyCell = existingRow.querySelector(".jumlah");
+          const newQty = parseInt(qtyCell.textContent) + 1;
+          qtyCell.textContent = newQty;
+          existingRow.querySelector(".item-check").dataset.qty = newQty;
+        } else {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>
+              <label class="custom-checkbox">
+                <input type="checkbox" class="item-check" data-price="${price}" data-qty="1" checked>
+                <span class="checkmark"></span>
+                ${name}
+              </label>
+            </td>
+            <td class="price">Rp.${price.toLocaleString("id-ID")}</td>
+            <td class="jumlah" style="text-align:center">1</td>
+            <td class="subtotal" style="text-align:right">Rp.${price.toLocaleString("id-ID")}</td>
+            <td class="remove"><span class="remove-item">×</span></td>
+          `;
+          tbody.appendChild(row);
+        }
+
+        calculateTotal();
+        updateSelectAllStatus();
+        attachEvents();
+
+        const count = document.querySelectorAll(".item-check").length;
+        document.querySelector(".small-grey").textContent = `(${count})`;
+
+        toggleMenuPopup();
+        showCartNotif(name);
+      }
+
+      renderMenu("ASINAN");
+
+      function showCartNotif(name) {
+        const n = document.getElementById("cartNotif");
+
+        const text = n.querySelector(".notification-text");
+        text.textContent = name + " added to cart.";
+
+        n.style.display = "flex";
+
+        requestAnimationFrame(() => {
+          n.classList.add("show");
+        });
+
+        setTimeout(() => {
+          n.classList.remove("show");
+
+          setTimeout(() => {
+            n.style.display = "none";
+          }, 300);
+        }, 2000);
+      }
+
       attachEvents();
       calculateTotal();
       updateSelectAllStatus();
+      document.querySelector(".small-grey").textContent = "(0)";
     </script>
   </body>
 </html>
