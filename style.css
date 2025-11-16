@@ -21,7 +21,7 @@ html, body {
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #fff8e5;
+  background-color: #F1E9D4;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -47,14 +47,16 @@ body {
 
 /* Bar biru atas */
 .top-bar {
-  background-color: #0b2b68;
+  background-color: #102F76;
   height: 50px;
   width: 100%;
+  position: fixed;
+  z-index: 99;
 }
 
 /* Navbar kuning */
 nav {
-  position: relative;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,15 +64,21 @@ nav {
   width: fit-content;
   padding-left: 20px;
   padding-right: 20px;
-  margin: -20px auto 0 auto;
+  
   border-radius: 50px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
   font-weight: bold;
   font-size: 22px;
-  color: #0b2b68;
-  height: 55px; /* tinggi navbar tetap */
+  color: #102F76;
+  height: 55px;
   z-index: 99;
+
+  /* Tambahin ini */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px; /* kalau mau tetap naik */
 }
+
 
 nav a {
   text-decoration: none;
@@ -117,6 +125,83 @@ nav a:hover {
 .icon-social {
   z-index: 9999;
 }
+
+.mobile-nav {
+  display: none;
+}
+
+/* HAMBURGER BUTTON */
+.hamburger-btn {
+  font-size: 30px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  color: #F6D932;
+  position: absolute;
+  top: 120%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 9999;
+}
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    background: #102F76;
+    padding: 10px 18px;
+    z-index: 200;
+  }
+  
+  .mobile-logo {
+    position: absolute;
+    top: 23%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    
+
+   
+  }
+}
+
+/* MOBILE SLIDE MENU */
+.mobile-menu {
+  position: fixed;
+  top: 42px;
+  right: -100%;
+  width: 20%;
+  max-width: 320px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: 0.35s ease-in-out;
+  z-index: 300;
+  margin-right: 20px;
+}
+
+.mobile-menu a {
+  display: block;
+  background: #F6D932;
+  color: #0B2B68;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 40px;
+  text-align: center;
+  margin-top: 6px;
+  border: #0B2B68 2px solid;
+  top: 200px;
+  font-weight: 600;
+}
+
 
 .cart-title {
     color: #F6D932;
@@ -690,6 +775,17 @@ input[type=checkbox] {
   z-index: 10;
 }
 
+
+.Order-Via{
+  min-height: 310px;
+  background-size: cover;
+  background-image: url('Properties/Order_Via_Section/checkered_red.png');
+  margin: auto;
+  background-position: center;
+}
+
+
+
 /* Checkerboard bawah */
 .checkerboard {
   display: grid;
@@ -748,3 +844,5 @@ input[type=checkbox] {
   0%, 100% { transform: rotate(-5deg) translateY(0); }
   50% { transform: rotate(-2deg) translateY(-6px); }
 }
+
+

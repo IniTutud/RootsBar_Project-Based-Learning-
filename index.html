@@ -31,32 +31,53 @@
 
     <div class="top-bar"></div>
 
-    <nav>
-      <div class="left-links">
-        <a href="#home">HOME</a>
-        <a href="#about">ABOUT</a>
-      </div>
+   <!-- NAVBAR DESKTOP -->
+<nav class="desktop-nav">
+  <div class="left-links">
+    <a href="#home">HOME</a>
+    <a href="#about">ABOUT</a>
+  </div>
 
-      <img src="Properties/logo.png" alt="Logo" class="logo" />
+  <img src="Properties/logo.png" alt="Logo" class="logo" />
 
-      <div class="right-links">
-        <a href="#menu">MENU</a>
-        <a href="#loc">MAPS</a>
-      </div>
-    </nav>
+  <div class="right-links">
+    <a href="#menu">MENU</a>
+    <a href="#loc">MAPS</a>
+  </div>
+</nav>
+
+<!-- NAVBAR MOBILE -->
+<header class="mobile-nav">
+  <img src="Properties/logo.png" class="mobile-logo" />
+  <button id="hamburgerBtn" class="hamburger-btn">
+    <i id="hamburgerIcon" class="fa-solid fa-bars"></i>
+  </button>
+</header>
+
+<!-- MOBILE SLIDE MENU -->
+<div id="mobileMenu" class="mobile-menu">
+
+  <div class="menu-items">
+    <a href="#home">HOME</a>
+    <a href="#about">ABOUT</a>
+    <a href="#menu">MENU</a>
+    <a href="#loc">MAPS</a>
+  </div>
+</div>
+
 
     <!-- HERO -->
-    <section id="home" class="relative text-center py-40 bg-[#FFF8E5]">
+    <section id="home" class="relative text-center py-40 bg-[#F1E9D4]">
       <!-- Dekorasi kiri -->
       <img
         src="Properties/Hero_Section/lettuce.png"
         alt="Lettuce"
-        class="decor-left absolute top-[-20px]  left-[-100px] size-[300px] md:size-[500px] rotate-[-10deg] z-[1] md:top-[-20px] md:left-[-200px] "
+        class="decor-left absolute top-[-20px] left-[-100px] size-[300px] md:size-[500px] rotate-[-10deg] z-[1] md:top-[-20px] md:left-[-200px]"
       />
       <img
         src="Properties/Hero_section/ham.png"
         alt="Ham"
-        class="decor-left absolute top-[370px] left-[-100px] w-[180px]  md:w-64 rotate-[10deg] z-[1] md:top-64 md:left-32"
+        class="decor-left absolute top-[370px] left-[-100px] w-[180px] md:w-64 rotate-[10deg] z-[1] md:top-64 md:left-32"
       />
       <!-- Dekorasi kanan -->
       <img
@@ -67,7 +88,7 @@
       <img
         src="Properties/Hero_Section/bread.png"
         alt="Bread"
-        class="decor-right absolute top-[370px] right-0 w-[200px] md:w-96 rotate-[5deg] z-[1]  md:top-64 md:right-0"
+        class="decor-right absolute top-[370px] right-0 w-[200px] md:w-96 rotate-[5deg] z-[1] md:top-64 md:right-0"
       />
 
       <!-- Konten utama -->
@@ -84,63 +105,68 @@
 
     <!-- About Section -->
     <section
-  id="about"
-  class="px-[10%] py-20 bg-[#FFF8E5] flex flex-col md:flex-row items-center gap-14"
->
-  <!-- IMAGE (centered on mobile, right on desktop) -->
-  <div class="relative w-full md:w-1/2 flex justify-center">
-    <div class="relative b">
-      <img
-        src="Properties/About_Section/about.png"
-        alt="Sandwich"
-        class="rounded-[20px] z-10 relative"
-      />
-      <div class="absolute inset-0 translate-x-3 translate-y-3 "></div>
-    </div>
-  </div>
-
-  <!-- TEXT -->
-  <div class="w-full md:w-1/2 text-[#102f76] text-center md:text-left">
-    <h2 class="text-[48px] font-bold mb-6 about-title no-copy underline decoration-[#c8161d] underline-offset-[10px]">
-      About Us
-    </h2>
-
-    <p
-      class="text-[14px] md:text-[18px] text-left md                           leading-relaxed mb-10 p-4"
+      id="about"
+      class="px-[10%] py-20 bg-[#F1E9D4] flex flex-col md:flex-row items-center gap-14"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur.
-    </p>
+      <!-- IMAGE (centered on mobile, right on desktop) -->
+      <div class="relative w-full md:w-1/2 flex justify-center">
+        <div class="relative b">
+          <img
+            src="Properties/About_Section/about.png"
+            alt="Sandwich"
+            class="rounded-[20px] z-10 relative"
+          />
+          <div class="absolute inset-0 translate-x-3 translate-y-3"></div>
+        </div>
+      </div>
 
-    <a
-      href="#menu"
-      class="order-btn inline-block font-bold text-[22px] px-10 py-3 transition-transform duration-200 hover:scale-105"
-    >
-      Order Now
-    </a>
-  </div>
-</section>
+      <!-- TEXT -->
+      <div class="w-full md:w-1/2 text-[#102f76] text-center md:text-left">
+        <h2
+          class="text-[48px] font-bold mb-6 about-title no-copy underline decoration-[#c8161d] underline-offset-[10px]"
+        >
+          About Us
+        </h2>
 
+        <p
+          class="text-[14px] md:text-[18px] text-left md leading-relaxed mb-10 p-4"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur.
+        </p>
+
+        <a
+          href="#menu"
+          class="order-btn inline-block font-bold text-[22px] px-10 py-3 transition-transform duration-200 hover:scale-105"
+        >
+          Order Now
+        </a>
+      </div>
+    </section>
 
     <!-- Checkerboard -->
     <img
       src="Properties/About_Section/checkered.png"
       alt="Checkerboard"
-      class=" w-[1900px] md:w-full"
+      class="w-[1900px] md:w-full"
     />
 
-     <div id="menuPopup" class="menu-popup">
+    <div id="menuPopup" class="menu-popup">
       <div class="menu-content card-style">
         <span class="close" onclick="toggleMenuPopup()">&times;</span>
         <div class="menu-detail">
           <div class="menu-popUp-img">
-            <img id="popupImg" src="" alt="Menu Image" class="popup-img">
+            <img id="popupImg" src="" alt="Menu Image" class="popup-img" />
           </div>
           <div class="menu-popUp-desc text-center relative">
-            <div id="popupTitle" class="title-container text-3xl font-bold"></div>
+            <div
+              id="popupTitle"
+              class="title-container text-3xl font-bold"
+            ></div>
 
             <div class="relative star-wrapper">
               <img
@@ -155,7 +181,9 @@
 
             <p id="popupDesc" class="description popupDesc text-[#FFFFFF]"></p>
 
-            <div class="ingredients-title mt-4 ingredients-title">Ingredients</div>
+            <div class="ingredients-title mt-4 ingredients-title">
+              Ingredients
+            </div>
 
             <div id="popupIngredients" class="ingredients-list"></div>
 
@@ -167,63 +195,75 @@
 
     <div id="cartNotif" class="notification" role="alert" aria-live="assertive">
       <div class="notification-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" >
+        <svg viewBox="0 0 24 24">
           <polyline points="20 6 9 17 4 12" />
         </svg>
       </div>
       <div class="notification-text"></div>
-      <button class="close-button" aria-label="Close notification" onclick="this.parentElement.style.display='none';">&times;</button>
+      <button
+        class="close-button"
+        aria-label="Close notification"
+        onclick="this.parentElement.style.display='none';"
+      >
+        &times;
+      </button>
     </div>
 
     <section id="menu" class="menu bg-[#102F76] text-white text-center py-12">
-     
-<!-- TITLE -->
-  <div class="px-10 flex items-center justify-center md:justify-start  mb-8">
-    <img src="Properties/Menu_Section/bintang.png" class="w-[30px] mt-[60px]" />
-    <h1 class="text-[50px] font-bold text-[#FFF8E5]"
-        style="font-family: 'Cooper Black', sans-serif;">
-      Our Menu
-    </h1>
-    <img src="Properties/Menu_Section/bintang.png" class="w-[30px] mb-[60px]" />
-  </div>
+      <!-- TITLE -->
+      <div class="px-10 flex items-center justify-center md:justify-start mb-8">
+        <img
+          src="Properties/Menu_Section/bintang.png"
+          class="w-[30px] mt-[60px]"
+        />
+        <h1
+          class="text-[50px] font-bold text-[#FFF8E5]"
+          style="font-family: 'Cooper Black', sans-serif"
+        >
+          Our Menu
+        </h1>
+        <img
+          src="Properties/Menu_Section/bintang.png"
+          class="w-[30px] mb-[60px]"
+        />
+      </div>
 
-  <!-- TOP BORDER -->
-<div class="w-[88%] mx-auto border-t-[3px] border-yellow-400"></div>
+      <!-- TOP BORDER -->
+      <div class="w-[88%] mx-auto border-t-[3px] border-yellow-400"></div>
 
-  <!-- ROW: LEFT TEXT + RIGHT BUTTON GROUP -->
-  <div class="px-10 py-[8px] md:py-4 flex justify-between items-center">
+      <!-- ROW: LEFT TEXT + RIGHT BUTTON GROUP -->
+      <div class="px-10 py-[8px] md:py-4 flex justify-between items-center">
+        <!-- LEFT LABEL -->
+        <p
+          class="md:text-[19px] tracking-wide whitespace-nowrap pr-[20px] font-semibold tracking-wide text-[#FFF8E5] md:ml-[80px] md:pr-0"
+        >
+          PICK A VARIANT
+        </p>
 
-    <!-- LEFT LABEL -->
-    <p class="md:text-[19px] tracking-wide whitespace-nowrap pr-[20px] font-semibold tracking-wide text-[#FFF8E5] md:ml-[80px] md:pr-0  ">
-      PICK A VARIANT
-    </p>
+        <!-- RIGHT BUTTON GROUP -->
+        <div
+          class="flex md:gap-5 gap-[10px] items-center md:mr-[550px] overflow-x-auto scroll-smooth"
+          id="variant-scroll"
+        >
+          <button class="variant-btn active">ASINAN</button>
 
-    <!-- RIGHT BUTTON GROUP -->
-    <div class="flex md:gap-5 gap-[10px] items-center md:mr-[550px] overflow-x-auto scroll-smooth" id="variant-scroll">
-      <button class="variant-btn active">
-        ASINAN
-      </button>
+          <button class="variant-btn">MANISAN</button>
 
-      <button class="variant-btn ">
-        MANISAN
-      </button>
+          <button class="variant-btn">GOLDEN FIL</button>
+        </div>
 
-      <button class="variant-btn ">
-        GOLDEN FIL
-      </button>
-    </div>
+        <!-- ARROW BUTTON -->
+        <button
+          id="scroll-right"
+          class="bg-yellow-400 text-red-600 font-bold rounded-full w-7 h-7 flex-shrink-0 justify-center items-center md:hidden"
+        >
+          ➜
+        </button>
+      </div>
 
-    <!-- ARROW BUTTON -->
-  <button id="scroll-right"
-          class="bg-yellow-400 text-red-600 font-bold rounded-full w-7 h-7 flex-shrink-0 justify-center items-center md:hidden">
-    ➜
-  </button>
+      <!-- BOTTOM BORDER -->
 
-  </div>
-
-  <!-- BOTTOM BORDER -->
- 
-<div class="w-[88%] mx-auto border-t-[3px] border-yellow-400"></div>
+      <div class="w-[88%] mx-auto border-t-[3px] border-yellow-400"></div>
 
       <div
         id="menuList"
@@ -334,69 +374,69 @@
     </div>
 
     <section
-      class="min-h-[600px] bg-[url('/Properties/Order_Via_Section/checkered_phone.png')] mx-auto md:bg-[url('/Properties/Order_Via_Section/checkered_red.png')] bg-cover bg-no-repeat md:min-h-[310px] md:bg-center"
+      class="min-h-[315px] sm:min-h-[550px] md:min-h-[310px] bg-no-repeat mx-auto bg-[url('/Properties/Order_Via_Section/checkered_phone.png')] bg-contain bg-top md:bg-[url('/Properties/Order_Via_Section/checkered_red.png')] md:bg-cover md:bg-center"
     >
       <div class="mx-auto">
         <!-- Judul -->
         <h2
-          class="text-[#0a2458] text-5xl font-extrabold tracking-wide mb-8 underline decoration-[#c8161d] underline-offset-4 no-copy justify-center align-items-center flex items-center pt-[114px] md:mr-[66rem] "
+          class="text-[#0a2458] text-4xl md:text-6xl sm:text-5xl font-extrabold tracking-wide mb-8 underline decoration-[#c8161d] underline-offset-4 no-copy justify-center align-items-center flex items-center pt-[80px] sm:pt-[114px] md:mr-[60rem]"
           style="font-family: 'Cooper Black', 'Poppins', sans-serif"
         >
           ORDER VIA
         </h2>
 
-        <!-- <div class="relative flex gap-8 ml-[440px] bottom-[30px]">
+        <div
+          class="flex justify-center md:gap-[18px] gap-[10px] mt-[-12px] md:relative md:right-0 md:bottom-[100px] md:left-[250px]"
+        >
+          <!-- Item -->
           <a
             href="#"
-            class="bg-[#F6D932] hover:bg-[#ffcc33] shadow-md rounded-2xl px-[80px] py-[40px] flex items-center justify-center gap-3 transition-all z-1"
+            class="bg-[#F6D932] w-[65px] h-[65px] sm:w-24 sm:h-[130px] sm:w-[130px] md:w-[200px] md:h-[100px] rounded-[25px] flex items-center justify-center shadow-[0_4px_5px_rgba(0,0,0,0.25)] hover:scale-105 transition"
           >
             <img
               src="Properties/Order_Via_Section/whatsapp.png"
-              alt="whatsapp"
-              class="h-10 z-99"
+              alt="WhatsApp"
+              class="w-[30px] sm:w-12"
             />
           </a>
 
-         
           <a
             href="#"
-            class="bg-[#F6D932] hover:bg-[#ffcc33] shadow-md rounded-2xl px-[40px] py-[40px] flex items-center justify-center gap-3 transition-all"
+            class="bg-[#F6D932] w-[65px] h-[65px] sm:w-24 sm:h-[130px] sm:w-[130px] md:w-[200px] md:h-[100px] rounded-[25px] flex items-center justify-center shadow-[0_4px_5px_rgba(0,0,0,0.25)] hover:scale-105 transition"
           >
             <img
-              src="Properties/Order_Via_Section/gojek.png"
-              alt="gojek"
-              class="h-10"
+              src="Properties/Order_Via_Section/gojek_1.png"
+              alt="GoFood"
+              class="w-[30px] sm:w-12"
             />
           </a>
 
-  
           <a
             href="#"
-            class="bg-[#F6D932] hover:bg-[#ffcc33] shadow-md rounded-2xl px-[40px] py-[40px] flex items-center justify-center gap-3 transition-all"
+            class="bg-[#F6D932] w-[65px] h-[65px] sm:w-24 sm:h-[130px] sm:w-[130px] md:w-[200px] md:h-[100px] rounded-[25px] flex items-center justify-center shadow-[0_4px_5px_rgba(0,0,0,0.25)] hover:scale-105 transition"
           >
             <img
               src="Properties/Order_Via_Section/grab.png"
-              alt="grab"
-              class="h-10"
+              alt="GrabFood"
+              class="w-10 sm:w-12 md:w-[100px]"
             />
           </a>
 
-    
           <a
             href="#"
-            class="bg-[#F6D932] hover:bg-[#ffcc33] shadow-md rounded-2xl px-[40px] py-[40px] flex items-center justify-center gap-3 transition-all"
+            class="bg-[#F6D932] w-[65px] h-[65px] sm:w-24 sm:h-[130px] sm:w-[130px] md:w-[200px] md:h-[100px] rounded-[25px] flex items-center justify-center shadow-[0_4px_5px_rgba(0,0,0,0.25)] hover:scale-105 transition"
           >
             <img
-              src="Properties/Order_Via_Section/shopee.png"
-              alt="shopee"
-              class="h-10"
+              src="Properties/Order_Via_Section/shopee_1.png"
+              alt="ShopeeFood"
+              class="w-[30px] sm:w-12"
             />
           </a>
-        </div> -->
+        </div>
       </div>
     </section>
     <!-- REVIEW & RATING Section -->
-    <section class="bg-[#FFF8E5] py-16 px-6 md:px-20">
+    <section class="bg-[#F1E9D4] py-16 px-6 md:px-20">
       <h2
         class="text-[#0a2458] text-4xl md:text-5xl font-extrabold tracking-wide mb-12 underline decoration-[#c8161d] underline-offset-4 text-center no-copy"
         style="font-family: 'Cooper Black', 'Poppins', sans-serif"
@@ -483,7 +523,7 @@
       </div>
     </section>
     <!-- CUSTOMER REVIEW SECTION -->
-    <section class="bg-[#FFF8E5] py-16 px-6 md:px-20 no-copy">
+    <section class="bg-[#F1E9D4] py-16 px-6 md:px-20 no-copy">
       <div class="max-w mx-auto">
         <div class="flex flex-wrap justify-center gap-1">
           <!-- CARD 1 -->
@@ -518,7 +558,7 @@
 
           <!-- CARD 2 -->
           <div
-            class="bg-[#0b2b89] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 relative"
+            class="bg-[#0b2b89] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 pb-40 relative"
             style="transform: rotate(2deg)"
           >
             <div
@@ -548,7 +588,7 @@
 
           <!-- CARD 3 -->
           <div
-            class="bg-[#0b2b89] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 relative"
+            class="bg-[#0b2b89] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 pb-40 relative"
             style="transform: rotate(-1.5deg)"
           >
             <div class="absolute top-0 left-0 w-full h-6 rounded-t-2xl"></div>
@@ -579,7 +619,7 @@
 
           <!-- CARD 4 -->
           <div
-            class="bg-[#102F76] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 relative"
+            class="bg-[#102F76] text-white rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 pb-40 relative"
             style="transform: rotate(2deg)"
           >
             <div
@@ -617,7 +657,7 @@
         <img
           src="Properties/location_checker.png"
           alt=""
-          class="w-[900px] absolute z-1 opacity-[10%] right-0 md:mt-[10px] mt-[145px]"
+          class="w-[900px] absolute z-1 opacity-[10%] right-0 md:mt-[10px] mt-[145px] mt-[340px]"
         />
       </div>
       <div
@@ -642,7 +682,7 @@
         <!-- RIGHT: TEXT & BUTTON -->
         <div class="text-center">
           <div
-            class="bg-[#f9dd3c] text-[#0a2458] title-font text-3xl md:text-4xl font-extrabold px-28 py-3 rounded-full inline-block shadow-md mb-5 inner-shadow relative"
+            class="bg-[#f9dd3c] text-[#0a2458] title-font text-3xl md:text-4xl font-extrabold px-28 py-3 rounded-full inline-block shadow-md mb-5 inner-shadow relative whitespace-nowrap"
           >
             Find us at
           </div>
@@ -699,10 +739,10 @@
         </div>
 
         <!-- RIGHT SIDE -->
-        <div class="flex flex-col md:items-end gap-4">
+        <div class="flex flex-col md:items-end mr-[40px] md:mr-0 gap-4 ">
           <!-- Address Bar -->
           <div
-            class="bg-[#c62828] text-white font-semibold px-4 py-2 rounded-md inline-flex items-center gap-2 shadow-md relative"
+            class="bg-[#c62828] text-white font-semibold px-4 py-2 rounded-md inline-flex items-center gap-2 shadow-md relative whitespace-nowrap"
           >
             <i class="fa-solid fa-location-dot"></i>
             <span>Jl. Jojoran Gang 1 No. 20, Surabaya</span>
@@ -735,7 +775,7 @@
         <img
           src="Properties/checker_3.png"
           alt="Checkerboard"
-          class="w-[1510px] ml-2"
+          class="w-[1600px] mt-[17px] "
         />
       </div>
 
@@ -747,441 +787,7 @@
       </div>
     </footer>
 
-    <script>
-      // ===== INITIAL RATING DATA =====
-      let ratingCounts = [1, 2, 3, 4, 57]; // ★ → ★★★★★★
-      let totalReviews = ratingCounts.reduce((a, b) => a + b, 0);
-      let totalStars = ratingCounts.reduce(
-        (sum, count, i) => sum + count * (i + 1),
-        0
-      );
-
-      // ===== CHART SETUP =====
-      const ctx = document.getElementById("ratingChart").getContext("2d");
-      const ratingChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: ["★", "★★", "★★★", "★★★★", "★★★★★"],
-          datasets: [
-            {
-              data: ratingCounts,
-              backgroundColor: "#ffffff",
-              borderRadius: 8,
-              barPercentage: 0.6,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            x: {
-              grid: { display: false },
-              ticks: {
-                color: "#FFD700",
-                font: { size: 14, weight: "bold" },
-              },
-            },
-            y: {
-              grid: { color: "rgba(255,255,255,0.2)" },
-              ticks: {
-                color: "#ffffff",
-                stepSize: 4,
-              },
-            },
-          },
-          plugins: { legend: { display: false } },
-        },
-      });
-
-      // ===== UPDATE AVERAGE DISPLAY =====
-      function updateAverage() {
-        totalReviews = ratingCounts.reduce((a, b) => a + b, 0);
-        totalStars = ratingCounts.reduce(
-          (sum, count, i) => sum + count * (i + 1),
-          0
-        );
-        const avg = totalStars / totalReviews;
-        document.getElementById("avgScore").textContent = avg.toFixed(1);
-        document.getElementById("reviewCount").textContent =
-          totalReviews + " Reviews";
-
-        // update stars
-        const starContainer = document.getElementById("avgStars");
-        starContainer.innerHTML = "";
-        for (let i = 1; i <= 5; i++) {
-          const star = document.createElement("span");
-          star.textContent = "★";
-          star.classList.add(
-            i <= Math.round(avg) ? "text-yellow-400" : "text-gray-400",
-            "text-xl"
-          );
-          starContainer.appendChild(star);
-        }
-      }
-
-      updateAverage();
-
-      // ===== STAR RATING FORM =====
-      const stars = document.querySelectorAll("#starContainer i");
-      let selectedStars = 0;
-
-      stars.forEach((star) => {
-        star.addEventListener("mouseover", () => {
-          const val = parseInt(star.dataset.value);
-          highlightStars(val);
-        });
-        star.addEventListener("mouseleave", () => {
-          highlightStars(selectedStars);
-        });
-        star.addEventListener("click", () => {
-          selectedStars = parseInt(star.dataset.value);
-          highlightStars(selectedStars);
-        });
-      });
-
-      function highlightStars(count) {
-        stars.forEach((s, i) => {
-          if (i < count) {
-            s.classList.remove("fa-regular", "text-gray-400");
-            s.classList.add("fa-solid", "text-yellow-400");
-          } else {
-            s.classList.remove("fa-solid", "text-yellow-400");
-            s.classList.add("fa-regular", "text-gray-400");
-          }
-        });
-      }
-
-      // ===== SUBMIT BUTTON =====
-      document.getElementById("submitReview").addEventListener("click", () => {
-        const review = document.getElementById("reviewText").value.trim();
-        if (selectedStars === 0)
-          return alert("Please select your star rating!");
-        if (review === "") return alert("Please write a review first!");
-
-        // increase chart data
-        ratingCounts[selectedStars - 1]++;
-        ratingChart.data.datasets[0].data = ratingCounts;
-        ratingChart.update();
-
-        // update average rating & count
-        updateAverage();
-
-        // reset form
-        selectedStars = 0;
-        highlightStars(0);
-        document.getElementById("reviewText").value = "";
-
-        alert("Thank you for your feedback!");
-      });
-
-      //Tambahan (feel free to edit/delete dhil)
-      // OKE SUWON
-      function toggleCart() {
-        const cart = document.getElementById("cartPopup");
-        cart.style.display = cart.style.display === "flex" ? "none" : "flex";
-      }
-
-      const selectAllCheckbox = document.getElementById("select-all");
-      const totalElement = document.querySelector(".footer-cart strong");
-
-      function formatRp(value) {
-        return "Rp." + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      }
-
-      function calculateTotal() {
-        const itemCheckboxes = document.querySelectorAll(".item-check");
-        let total = 0;
-
-        itemCheckboxes.forEach((cb) => {
-          const price = parseInt(cb.dataset.price);
-          const qty = parseInt(cb.dataset.qty);
-          const row = cb.closest("tr");
-          if (cb.checked) {
-            const subtotal = price * qty;
-            total += subtotal;
-            row.querySelector(".subtotal").textContent = formatRp(subtotal);
-          } else {
-            row.querySelector(".subtotal").textContent = "Rp.0";
-          }
-        });
-
-        totalElement.textContent = formatRp(total);
-      }
-
-      function updateSelectAllStatus() {
-        const itemCheckboxes = document.querySelectorAll(".item-check");
-        const allChecked =
-          itemCheckboxes.length > 0 &&
-          Array.from(itemCheckboxes).every((cb) => cb.checked);
-        selectAllCheckbox.checked = allChecked;
-      }
-
-      function attachEvents() {
-        const itemCheckboxes = document.querySelectorAll(".item-check");
-
-        itemCheckboxes.forEach((cb) => {
-          cb.addEventListener("change", () => {
-            calculateTotal();
-            updateSelectAllStatus();
-          });
-        });
-
-        document.querySelectorAll(".remove-item").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const row = btn.closest("tr");
-            row.classList.add("fade-out");
-            setTimeout(() => {
-              row.remove();
-              calculateTotal();
-              updateSelectAllStatus();
-
-              const count = document.querySelectorAll(".item-check").length;
-              document.querySelector(".small-grey").textContent = `(${count})`;
-            }, 300);
-          });
-        });
-      }
-
-      selectAllCheckbox.addEventListener("change", () => {
-        const checked = selectAllCheckbox.checked;
-        document
-          .querySelectorAll(".item-check")
-          .forEach((cb) => (cb.checked = checked));
-        calculateTotal();
-      });
-
-      const menuData = {
-       ASINAN: [
-          { img: "Properties/Menu_Section/beef_ham.png", 
-            popupImg: "Properties/Menu_Section/beef_ham_popup.png", 
-            name: "Beef Ham", price: 15000, 
-            description: "Roti Bakar Beef Ham adalah roti bakar premium yang diisi dengan irisan daging sapi asap (beef ham), keju leleh, dan saus spesial. Untuk menciptakan rasa yang lezat dan khas, Roti Bakar Beef Ham dibuat dari bahan-bahan pilihan berkualitas tinggi.",
-            ingredients: [
-              "Properties/Ingredients/bread.png",
-              "Properties/Ingredients/ham.png",
-              "Properties/Ingredients/lettuce.png"
-            ]
-          },
-
-          { img: "Properties/Menu_Section/beef_patties.png", 
-            popupImg: "Properties/Menu_Section/beef_patties_popup.png", 
-            name: "Beef + Pattis", price: 21000,
-            description: "Rasa Beef + Patties adalah roti panggang gurih berisi daging beef lembut dan patties yang padat. Kamu mendapatkan perpaduan keju leleh dan saus yang menambah rasa. Isian dagingnya memberi pengalaman makan yang mantap dan cocok untuk kamu yang ingin pilihan roti panggang yang lebih mengenyangkan.",
-            ingredients: [
-              "Properties/Ingredients/bread.png",
-              "Properties/Ingredients/ham.png",
-              "Properties/Ingredients/lettuce.png",
-              "Properties/Ingredients/beef.png"
-            ] 
-          },
-        ],
-        
-        MANISAN: [
-          { img: "Properties/Menu_Section/choco_choco.png", 
-          popupImg: "Properties/Menu_Section/choco_choco_popup.png", 
-          name: "Choco + Choco", price: 20000,
-          description: "Rasa Choco + Choco adalah roti panggang manis dengan olesan cokelat lembut dan tambahan cokelat tebal yang membuat rasanya kaya. Kamu merasakan roti yang hangat dengan tekstur renyah dan aroma cokelat yang kuat. Roti ini cocok untuk kamu yang ingin sajian manis dengan cita rasa cokelat ganda.",
-            ingredients: [
-              "Properties/Ingredients/bread.png",
-              "Properties/Ingredients/choco.png",
-              "Properties/Ingredients/chocos.png"
-            ]
-         }
-        ],
-
-        "GOLDEN FIL": [
-          {
-            img: "Properties/Menu_Section/beef_patties.png", 
-            popupImg: "Properties/Menu_Section/beef_patties_popup.png", 
-            name: "Beef Sausage", price: "27K",
-            description: "Rasa Beef + Patties adalah roti panggang gurih berisi daging beef lembut dan patties yang padat. Kamu mendapatkan perpaduan keju leleh dan saus yang menambah rasa. Isian dagingnya memberi pengalaman makan yang mantap dan cocok untuk kamu yang ingin pilihan roti panggang yang lebih mengenyangkan.",
-            ingredients: [
-              "Properties/Ingredients/bread.png",
-              "Properties/Ingredients/lettuce.png",
-              "Properties/Ingredients/ham.png",
-              "Properties/Ingredients/beef.png"
-            ]
-          },
-        ],
-      };
-
-      const buttons = document.querySelectorAll(".variant-btn");
-      const menuList = document.getElementById("menuList");
-
-      // Fungsi render menu
-      function renderMenu(category) {
-        const items = menuData[category];
-        menuList.innerHTML = items
-          .map(
-            (item) => `
-        <div class="menu-card">
-          <div class="relative w-[330px]">
-            <img src="${item.img}" alt="${item.name}" class="menu-img" />
-            <span class="paperclip"></span>
-          
-            
-            </div>
-          </div>
-        </div>
-      `
-          )
-          .join("");
-      }
-
-      // default tampilkan kategori pertama
-      renderMenu("ASINAN");
-
-      // event listener tombol
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          buttons.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          renderMenu(btn.textContent.trim());
-        });
-      });
-      
-       function renderMenu(category) {
-        const items = menuData[category];
-        menuList.innerHTML = items
-          .map(
-            (item) => `
-            <div class="menu-card hover-bounce" onclick='toggleMenuPopup(true, ${JSON.stringify(item)})'>
-              <div class="relative w-[330px]">
-                <img src="${item.img}" alt="${item.name}" class="menu-img" />
-                <span class="paperclip"></span>
-              </div>
-            </div>
-          `
-          )
-          .join("");
-      }
-
-      renderMenu("ASINAN");
-
-
-      function toggleMenuPopup(show = false, item = null) {
-        const popup = document.getElementById("menuPopup");
-
-        if (show && item) {
-        let price = item.price;
-        if (typeof price === "string" && price.includes("K")) {
-        price = parseInt(price.replace("K", "")) * 1000;
-        }
-
-          document.getElementById("popupImg").src = item.popupImg || item.img;
-          document.getElementById("popupTitle").textContent = item.name;
-          document.getElementById("popupDesc").textContent = item.description;
-
-          const popupBox = document.getElementById("menuPopup");
-          popupBox.dataset.name = item.name;
-          popupBox.dataset.price = price;
-
-          const ingContainer = document.getElementById("popupIngredients");
-          ingContainer.innerHTML = item.ingredients
-            .map(src => `<div class="ingredient-item"><img src="${src}"></div>`)
-            .join("");
-
-          setTimeout(() => {
-            const title = document.getElementById("popupTitle");
-            const h = title.offsetHeight;
-
-            const starone = document.querySelector(".star-1");
-            const startwo = document.querySelector(".star-2");
-
-            starone.style.top = h - 75 + "px";
-            startwo.style.top = h - 130 + "px";
-          }, 30);
-
-          popup.style.display = "flex";
-            } else {
-          popup.style.display = "none";
-          }
-          }
-
-
-
-      function addToCart() {
-        const popup = document.getElementById("menuPopup");
-        const name = popup.dataset.name;
-        const price = parseInt(popup.dataset.price);
-
-        const tbody = document.querySelector("#cartPopup tbody");
-
-        const existingRow = Array.from(tbody.querySelectorAll("tr")).find(row =>
-          row.querySelector("label").textContent.trim() === name
-        );
-
-        if (existingRow) {
-          const qtyCell = existingRow.querySelector(".jumlah");
-          const newQty = parseInt(qtyCell.textContent) + 1;
-          qtyCell.textContent = newQty;
-          existingRow.querySelector(".item-check").dataset.qty = newQty;
-        } else {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>
-              <label class="custom-checkbox">
-                <input type="checkbox" class="item-check" data-price="${price}" data-qty="1" checked>
-                <span class="checkmark"></span>
-                ${name}
-              </label>
-            </td>
-            <td class="price">Rp.${price.toLocaleString("id-ID")}</td>
-            <td class="jumlah" style="text-align:center">1</td>
-            <td class="subtotal" style="text-align:right">Rp.${price.toLocaleString("id-ID")}</td>
-            <td class="remove"><span class="remove-item">×</span></td>
-          `;
-          tbody.appendChild(row);
-        }
-
-        calculateTotal();
-        updateSelectAllStatus();
-        attachEvents();
-
-        const count = document.querySelectorAll(".item-check").length;
-        document.querySelector(".small-grey").textContent = `(${count})`;
-
-        toggleMenuPopup();
-        showCartNotif(name);
-      }
-
-      renderMenu("ASINAN");
-
-      function showCartNotif(name) {
-        const n = document.getElementById("cartNotif");
-
-        const text = n.querySelector(".notification-text");
-        text.textContent = name + " added to cart.";
-
-        n.style.display = "flex";
-
-        requestAnimationFrame(() => {
-          n.classList.add("show");
-        });
-
-        setTimeout(() => {
-          n.classList.remove("show");
-
-          setTimeout(() => {
-            n.style.display = "none";
-          }, 300);
-        }, 2000);
-      }
-
-      attachEvents();
-      calculateTotal();
-      updateSelectAllStatus();
-      document.querySelector(".small-grey").textContent = "(0)";
-
-      const scrollBox = document.getElementById("variant-scroll");
-  const scrollBtn = document.getElementById("scroll-right");
-
-  scrollBtn.addEventListener("click", () => {
-    scrollBox.scrollBy({
-      left: 150,
-      behavior: "smooth"
-    });
-  });
-    </script>
-
+  <script src="script.js"></script>
+     
   </body>
 </html>
