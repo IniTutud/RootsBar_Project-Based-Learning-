@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    @font-face { font-family: "Cooper Black"; src: url('CooperBlack.otf'); }
+
+    body { font-family: Poppins, sans-serif; }
+  </style>
+</head>
+
+<body class="bg-[#102F76] py-12">
+
+  <div class="w-[95%] max-w-[1250px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    <!-- LEFT CARD (Shipping Address) -->
+    <div class="bg-[#F7EEDB] rounded-2xl p-8 shadow-lg border-4 border-[#EFDFBF]">
+      <h2 class="text-2xl font-bold mb-6 text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76]" style="font-family:'Cooper Black'">
+        Shipping Address
+      </h2>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-sm text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76] font-semibold">First Name</label>
+          <input id="firstName"
+                 class="w-full mt-1 p-3 rounded-xl border border-[#ccbfa5] bg-[#f7eedb] focus:ring-2 focus:ring-yellow-400" />
+        </div>
+
+        <div>
+          <label class="text-sm text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76] font-semibold">Last Name</label>
+          <input id="lastName"
+                 class="w-full mt-1 p-3 rounded-xl border border-[#ccbfa5] bg-[#f7eedb] focus:ring-2 focus:ring-yellow-400" />
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <label class="text-sm text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76] font-semibold">Phone Number</label>
+        <input id="phone"
+               class="w-full mt-1 p-3 rounded-xl border border-[#ccbfa5] bg-[#f7eedb] focus:ring-2 focus:ring-yellow-400" />
+      </div>
+
+      <div class="mt-4">
+        <label class="text-sm text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76] font-semibold">Address</label>
+        <textarea id="address"
+                  class="w-full mt-1 p-3 rounded-xl border border-[#ccbfa5] bg-[#f7eedb] focus:ring-2 focus:ring-yellow-400 h-20"></textarea>
+      </div>
+
+      <!-- Services -->
+      <h2 class="text-xl font-bold mt-8 mb-4 text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76]" style="font-family:'Cooper Black'">
+        Services Option
+      </h2>
+
+      <div class="flex gap-4">
+        <button id="deliveryBtn"
+                class="w-32 py-4 rounded-2xl bg-white border-4 border-yellow-400 text-[#0a2458] font-bold hover:scale-105 transition">
+          Delivery
+        </button>
+
+        <button id="pickupBtn"
+                class="w-32 py-4 rounded-2xl bg-white border-4 border-yellow-400 text-[#0a2458] font-bold hover:scale-105 transition">
+          Pickup
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT CARD (Order Summary) -->
+    <div class="bg-[#F7EEDB] rounded-2xl p-8 shadow-lg border-4 border-[#EFDFBF]">
+      <h2 class="text-2xl font-bold mb-6 text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76]" style="font-family:'Cooper Black'">
+        Order Summary
+      </h2>
+
+      <!-- Item List -->
+      <div id="summaryItems" class="space-y-5"></div>
+
+      <div class="border-t-2 border-[#e6d8ba] my-4"></div>
+
+      <!-- Totals -->
+      <div class="flex justify-between text-[#0a2458] text-sm font-semibold">
+        <span>Subtotal</span>
+        <span id="subtotal">Rp.0</span>
+      </div>
+
+      <div class="flex justify-between text-[#0a2458] text-sm font-semibold mt-1">
+        <span>Shipping</span>
+        <span id="shipping">Rp.5.000</span>
+      </div>
+
+      <div class="border-t-2 border-[#e6d8ba] my-4"></div>
+
+      <div class="flex justify-between text-[#0a2458] text-lg font-bold">
+        <span>Total</span>
+        <span id="total">Rp.0</span>
+      </div>
+
+      <button
+        class="w-full mt-6 bg-[#F6D932] text-[#0a2458] font-bold py-4 rounded-xl text-lg shadow-md hover:scale-[1.03] transition">
+        Place Order
+      </button>
+    </div>
+
+  </div>
+
+
+
+<!-- ================= JS LOAD CHECKOUT DATA ================= -->
+<script src="script.js">
+</script>
+
+</body>
+</html>

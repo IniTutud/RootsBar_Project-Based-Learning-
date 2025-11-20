@@ -42,13 +42,13 @@
     </div>
 
     <!-- LOGOUT -->
-    <button id="logoutBtn" class="flex items-center gap-3 justify-center py-3 px-6 mx-6 bg-red-500 hover:bg-red-600 text-white rounded-full font-semibold shadow-lg transition">
+    <button class="flex items-center gap-3 justify-center py-3 px-6 mx-6 bg-red-500 hover:bg-red-600 text-white rounded-full font-semibold shadow-lg transition">
       <i class="fas fa-sign-out-alt"></i> Logout
     </button>
   </aside>
 
   <!-- DELETE POPUP -->
-<div id="logoutPopup" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50">
+<div id="trashPopup" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50">
   <div class="bg-red-600 p-6 rounded-3xl text-center w-[320px] shadow-xl">
 
     <img src="kuceng.png" class="w-52 mx-auto mb-4">
@@ -70,7 +70,7 @@
   <!-- MAIN CONTENT -->
   <main class="flex-1 overflow-y-auto">
 
-    <!-- HEADER dengan greeting -->
+    <!-- HEADER greeting -->
     <div class="flex justify-between items-center px-8 pt-8 pb-4">
       <h1 class="text-4xl font-extrabold">Product</h1>
       <p class="text-xl">Selamat datang, <span class="text-yellow-300">sh4rleez!</span></p>
@@ -115,7 +115,7 @@
             <span>Rp. 15.000</span>
             <div class="flex justify-center gap-4 text-lg">
               <i class="fas fa-edit cursor-pointer hover:text-yellow-400 transition"></i>
-              <i class="fas fa-trash cursor-pointer hover:text-red-500 transition"></i>
+              <i class="trashBtn fas fa-trash cursor-pointer hover:text-red-500 transition"></i>
             </div>
           </div>
 
@@ -126,18 +126,18 @@
             <span>Rp. 15.000</span>
             <div class="flex justify-center gap-4 text-lg">
               <i class="fas fa-edit cursor-pointer hover:text-yellow-400 transition"></i>
-              <i class="fas fa-trash cursor-pointer hover:text-red-500 transition"></i>
+              <i class="trashBtn fas fa-trash cursor-pointer hover:text-red-500 transition"></i>
             </div>
           </div>
           
-          <!-- ITEM 2 -->
+          <!-- ITEM 3 -->
           <div class="grid grid-cols-4 bg-[#1e3a8a] border border-blue-400 p-4 rounded-xl items-center text-center">
             <span>Beef Ham</span>
             <span>Asinan</span>
             <span>Rp. 15.000</span>
             <div class="flex justify-center gap-4 text-lg">
               <i class="fas fa-edit cursor-pointer hover:text-yellow-400 transition"></i>
-              <i class="fas fa-trash cursor-pointer hover:text-red-500 transition"></i>
+              <i class="trashBtn fas fa-trash cursor-pointer hover:text-red-500 transition"></i>
             </div>
           </div>
 
@@ -151,22 +151,25 @@
 </div>
 
 <script>
-  const logoutBtn = document.getElementById("logoutBtn");
-  const logoutPopup = document.getElementById("logoutPopup");
+  const trashButtons = document.querySelectorAll(".trashBtn");
+  const trashPopup = document.getElementById("trashPopup");
 
-  logoutBtn.addEventListener("click", () => {
-    logoutPopup.classList.remove("hidden");
+  trashButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      trashPopup.classList.remove("hidden");
+    });
   });
 
   function closePopup() {
-    logoutPopup.classList.add("hidden");
+    trashPopup.classList.add("hidden");
   }
 
   function confirmDelete() {
     alert("Product deleted!");
-    logoutPopup.classList.add("hidden");
+    trashPopup.classList.add("hidden");
   }
 </script>
+
 
 </body>
 </html>
