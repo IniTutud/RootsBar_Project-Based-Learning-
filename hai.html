@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Variant Switcher</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    .active-btn {
+      background-color: #f9dd3c;
+      color: #0a2458;
+      border-color: #0a2458;
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body class="bg-[#0b2b89] text-white min-h-screen flex flex-col items-center py-10">
+
+  <h2 class="text-3xl font-extrabold mb-6">PICK A VARIANT</h2>
+
+  <!-- BUTTONS -->
+  <div id="categoryBtns" class="flex gap-4 mb-10">
+    <button class="category-btn border-2 border-white px-8 py-2 rounded-full text-lg font-bold hover:bg-[#f9dd3c] hover:text-[#0a2458] transition-all duration-200 active-btn" data-category="asinan">ASINAN</button>
+    <button class="category-btn border-2 border-white px-8 py-2 rounded-full text-lg font-bold hover:bg-[#f9dd3c] hover:text-[#0a2458] transition-all duration-200" data-category="manisan">MANISAN</button>
+    <button class="category-btn border-2 border-white px-8 py-2 rounded-full text-lg font-bold hover:bg-[#f9dd3c] hover:text-[#0a2458] transition-all duration-200" data-category="gurih">GURIH</button>
+  </div>
+
+  <!-- MENU IMAGE CONTAINER -->
+  <div id="menuContainer" class="grid grid-cols-1 md:grid-cols-2 gap-10 px-6 md:px-20">
+    <!-- Default (ASINAN) -->
+    <div class="bg-white text-[#0a2458] rounded-2xl shadow-lg overflow-hidden w-[280px]">
+      <img src="https://i.ibb.co/2ZM4smh/asinan1.jpg" class="w-full h-[180px] object-cover" alt="">
+      <div class="p-4">
+        <p class="font-bold">Beef Ham</p>
+        <span class="text-sm font-semibold">15K</span>
+      </div>
+    </div>
+    <div class="bg-white text-[#0a2458] rounded-2xl shadow-lg overflow-hidden w-[280px]">
+      <img src="https://i.ibb.co/LdhYfQr/asinan2.jpg" class="w-full h-[180px] object-cover" alt="">
+      <div class="p-4">
+        <p class="font-bold">Cheese Toast</p>
+        <span class="text-sm font-semibold">18K</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const menuContainer = document.getElementById('menuContainer');
+
+    // Data dummy menu per kategori
+    const menus = {
+      asinan: [
+        { name: "Beef Ham", price: "15K", img: "https://i.ibb.co/2ZM4smh/asinan1.jpg" },
+        { name: "Cheese Toast", price: "18K", img: "https://i.ibb.co/LdhYfQr/asinan2.jpg" },
+      ],
+      manisan: [
+        { name: "Choco Toast", price: "20K", img: "https://i.ibb.co/Jmz7XMy/manisan1.jpg" },
+        { name: "Banana Choco", price: "22K", img: "https://i.ibb.co/j6HPCCg/manisan2.jpg" },
+      ],
+      gurih: [
+        { name: "Tuna Mayo", price: "25K", img: "https://i.ibb.co/mXzKDMH/gurih1.jpg" },
+        { name: "Sausage & Egg", price: "27K", img: "https://i.ibb.co/WxTtN5y/gurih2.jpg" },
+      ]
+    };
+
+    // Saat tombol diklik
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // hapus semua tombol active
+        categoryButtons.forEach(b => b.classList.remove('active-btn'));
+        // aktifkan tombol yang diklik
+        btn.classList.add('active-btn');
+
+        // ambil kategori
+        const selectedCategory = btn.dataset.category;
+        const selectedMenus = menus[selectedCategory];
+
+        // ganti isi menuContainer
+        menuContainer.innerHTML = selectedMenus.map(item => `
+          <div class="bg-white text-[#0a2458] rounded-2xl shadow-lg overflow-hidden w-[280px]">
+            <img src="${item.img}" class="w-full h-[180px] object-cover" alt="">
+            <div class="p-4">
+              <p class="font-bold">${item.name}</p>
+              <span class="text-sm font-semibold">${item.price}</span>
+            </div>
+          </div>
+        `).join('');
+      });
+    });
+  </script>
+</body>
+</html>
