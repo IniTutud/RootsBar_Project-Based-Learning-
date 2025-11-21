@@ -754,15 +754,7 @@ input[type=checkbox] {
 }
 
 /* Garis bawah merah di judul */
-.about-title::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100px;
-  height: 3px;
-  background-color: #e53935;
-}
+
 
 /* Tombol kuning gaya kartun */
 .order-btn {
