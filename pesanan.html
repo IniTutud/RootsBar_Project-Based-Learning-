@@ -21,7 +21,7 @@
  <aside class="w-64 bg-[#1e3a8a] flex flex-col justify-between py-6">
       <div>
         <div class="flex items-center gap-3 px-6 mb-8">
-          <div class="w-12 h-12 bg-yellow-300 rounded-lg flex items-center justify-center">
+          <div class=" rounded-lg flex items-center justify-center">
              <img src="logo.png" alt="Logo" class="w-10">
           </div>
         <h1 class="text-white font-extrabold text-xl">ROOT'S BAR</h1>
@@ -45,10 +45,10 @@
       </nav>
     </div>
 
-    <button id="logoutBtn" class="flex items-center gap-3 justify-center py-3 px-6 mx-6 bg-red-500 hover:bg-red-600 text-white rounded-full font-semibold shadow-lg transition">
-      <i class="fas fa-sign-out-alt"></i>
-      <span>Logout</span>
-    </button>
+   <button onclick="openLogoutPopup()" class="flex items-center gap-3 justify-center py-3 px-6 mx-6 bg-red-500 hover:bg-red-600 text-white rounded-full font-semibold shadow-lg transition">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </button>
   </aside>
 
   <!-- MAIN CONTENT -->
@@ -104,54 +104,6 @@
             <span>Rp. 20.000</span>
             <span>04/10/2025</span>
             <span>
-              <span class="bg-yellow-400 text-[#1e3a8a] px-5 py-1.5 rounded-full text-xs font-bold inline-block">PENDING</span>
-            </span>
-            <span class="text-blue-300 cursor-pointer hover:text-white transition">Lihat Detail</span>
-          </div>
-
-          <!-- Order 2 -->
-          <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a]">
-            <span class="font-semibold">#4055</span>
-            <span>Fadhil Nawwaf</span>
-            <span>Rp. 20.000</span>
-            <span>04/10/2025</span>
-            <span>
-              <span class="bg-green-500 text-white px-5 py-1.5 rounded-full text-xs font-bold inline-block">COMPLETED</span>
-            </span>
-            <span class="text-blue-300 cursor-pointer hover:text-white transition">Lihat Detail</span>
-          </div>
-
-          <!-- Order 3 -->
-          <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a]">
-            <span class="font-semibold">#4055</span>
-            <span>Fadhil Nawwaf</span>
-            <span>Rp. 20.000</span>
-            <span>04/10/2025</span>
-            <span>
-              <span class="bg-yellow-400 text-[#1e3a8a] px-5 py-1.5 rounded-full text-xs font-bold inline-block">PENDING</span>
-            </span>
-            <span class="text-blue-300 cursor-pointer hover:text-white transition">Lihat Detail</span>
-          </div>
-    
-          <!-- Order 4 -->
-          <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a]">
-            <span class="font-semibold">#4055</span>
-            <span>Fadhil Nawwaf</span>
-            <span>Rp. 20.000</span>
-            <span>04/10/2025</span>
-            <span>
-              <span class="bg-yellow-400 text-[#1e3a8a] px-5 py-1.5 rounded-full text-xs font-bold inline-block">PENDING</span>
-            </span>
-            <span class="text-blue-300 cursor-pointer hover:text-white transition">Lihat Detail</span>
-          </div>
-
-          <!-- Order 5 -->
-          <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a]">
-            <span class="font-semibold">#4055</span>
-            <span>Fadhil Nawwaf</span>
-            <span>Rp. 20.000</span>
-            <span>04/10/2025</span>
-            <span>
               <span class="bg-green-500 text-white px-5 py-1.5 rounded-full text-xs font-bold inline-block">COMPLETED</span>
             </span>
              <!-- LINK DETAIL -->
@@ -167,6 +119,66 @@
   </main>
 
 </div>
+
+<div id="logoutPopup"
+     class="fixed inset-0 hidden z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">
+
+  <div class="bg-red-600 w-[90%] max-w-md rounded-3xl p-8 text-center text-white shadow-2xl scale-90 opacity-0 transition-all duration-300"
+       id="logoutBox">
+    
+    <!-- ICON -->
+    <div class="flex justify-center mb-4">
+     <i class="fa-regular fa-circle-xmark text-6xl"></i>
+    </div>
+
+    <!-- TEXT -->
+    <h2 class="text-2xl font-extrabold mb-2">Are you sure?</h2>
+    <p class="text-sm opacity-90 mb-6">You’ll need to log in again to access your account.</p>
+
+    <!-- BUTTONS -->
+    <div class="flex justify-center gap-4 mt-4">
+      <button onclick="closeLogoutPopup()"
+              class="px-6 py-2 border-2 border-white text-white rounded-xl hover:bg-white hover:text-red-600 transition font-bold">
+        Cancel
+      </button>
+
+      <button onclick="confirmLogout()"
+              class="px-6 py-2 bg-white text-red-600 rounded-xl font-bold hover:bg-gray-200 transition">
+        Confirm
+      </button>
+    </div>
+
+  </div>
+</div>
+
+ <script>
+  const logoutPopup = document.getElementById("logoutPopup");
+  const logoutBox = document.getElementById("logoutBox");
+
+  function openLogoutPopup() {
+    logoutPopup.classList.remove("hidden");
+    setTimeout(() => {
+      logoutBox.classList.remove("scale-90", "opacity-0");
+      logoutBox.classList.add("scale-100", "opacity-100");
+    }, 10);
+  }
+
+  function closeLogoutPopup() {
+    logoutBox.classList.add("scale-90", "opacity-0");
+    logoutBox.classList.remove("scale-100", "opacity-100");
+    
+    setTimeout(() => {
+      logoutPopup.classList.add("hidden");
+    }, 200);
+  }
+
+  function confirmLogout() {
+    closeLogoutPopup();
+    setTimeout(() => {
+      window.location.href = "LoginAdmin.html"; // arahkan ke halaman login kamu
+    }, 300);
+  }
+</script>
 
 </body>
 </html>

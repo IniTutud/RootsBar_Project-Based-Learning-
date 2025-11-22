@@ -18,6 +18,11 @@
     />
 
     <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@500;600&display=swap"
       rel="stylesheet"
     />
@@ -31,40 +36,38 @@
 
     <div class="top-bar"></div>
 
-   <!-- NAVBAR DESKTOP -->
-<nav class="desktop-nav">
-  <div class="left-links">
-    <a href="#home">HOME</a>
-    <a href="#about">ABOUT</a>
-  </div>
+    <!-- NAVBAR DESKTOP -->
+    <nav class="desktop-nav">
+      <div class="left-links">
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+      </div>
 
-  <img src="Properties/logo.png" alt="Logo" class="logo" />
+      <img src="Properties/logo.png" alt="Logo" class="logo" />
 
-  <div class="right-links">
-    <a href="#menu">MENU</a>
-    <a href="#loc">MAPS</a>
-  </div>
-</nav>
+      <div class="right-links">
+        <a href="#menu">MENU</a>
+        <a href="#loc">MAPS</a>
+      </div>
+    </nav>
 
-<!-- NAVBAR MOBILE -->
-<header class="mobile-nav">
-  <img src="Properties/logo.png" class="mobile-logo" />
-  <button id="hamburgerBtn" class="hamburger-btn">
-    <i id="hamburgerIcon" class="fa-solid fa-bars"></i>
-  </button>
-</header>
+    <!-- NAVBAR MOBILE -->
+    <header class="mobile-nav">
+      <img src="Properties/logo.png" class="mobile-logo" />
+      <button id="hamburgerBtn" class="hamburger-btn">
+        <i id="hamburgerIcon" class="fa-solid fa-bars"></i>
+      </button>
+    </header>
 
-<!-- MOBILE SLIDE MENU -->
-<div id="mobileMenu" class="mobile-menu">
-
-  <div class="menu-items">
-    <a href="#home">HOME</a>
-    <a href="#about">ABOUT</a>
-    <a href="#menu">MENU</a>
-    <a href="#loc">MAPS</a>
-  </div>
-</div>
-
+    <!-- MOBILE SLIDE MENU -->
+    <div id="mobileMenu" class="mobile-menu">
+      <div class="menu-items">
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#menu">MENU</a>
+        <a href="#loc">MAPS</a>
+      </div>
+    </div>
 
     <!-- HERO -->
     <section id="home" class="relative text-center py-40 bg-[#F1E9D4]">
@@ -131,12 +134,13 @@
         <p
           class="text-[14px] md:text-[18px] text-left md leading-relaxed mb-10 p-4"
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
+          ROOT’S BAR adalah usaha kuliner yang berlokasi di Jl. Jojoran Gang 1
+          No. 20, Surabaya. Usaha ini beroperasi setiap hari pukul 16.00 sampai
+          22.00 WIB dan menyajikan roti bakar khas Bandung dengan konsep street
+          food modern. ROOT’S BAR menghadirkan roti bakar yang dibakar langsung,
+          memadukan cita rasa autentik Bandung dengan kreasi rasa yang mengikuti
+          tren kuliner masa kini. Setiap menu dibuat dari bahan yang terjaga
+          kualitasnya, proses yang higienis, dan rasa yang konsisten.
         </p>
 
         <a
@@ -213,10 +217,10 @@
       <!-- TITLE -->
       <div class="px-10 flex items-center justify-center md:justify-start mb-8">
         <a href="Login-Admin.html">
-        <img
-          src="Properties/Menu_Section/bintang.png"
-          class="w-[30px] mt-[60px]"
-        />
+          <img
+            src="Properties/Menu_Section/bintang.png"
+            class="w-[30px] mt-[60px]"
+          />
         </a>
         <h1
           class="text-[50px] font-bold text-[#FFF8E5]"
@@ -225,10 +229,10 @@
           Our Menu
         </h1>
         <a href="LoginAdmin.html">
-        <img
-          src="Properties/Menu_Section/bintang.png"
-          class="w-[30px] mb-[60px]"
-        />
+          <img
+            src="Properties/Menu_Section/bintang.png"
+            class="w-[30px] mb-[60px]"
+          />
         </a>
       </div>
 
@@ -249,11 +253,13 @@
           class="flex md:gap-5 gap-[10px] items-center md:mr-[550px] overflow-x-auto scroll-smooth"
           id="variant-scroll"
         >
-          <button class="variant-btn active">ASINAN</button>
+          <button class="variant-btn active" data-category="ASINAN">
+            ASINAN
+          </button>
 
-          <button class="variant-btn">MANISAN</button>
+          <button class="variant-btn" data-category="MANISAN">MANISAN</button>
 
-          <button class="variant-btn">GOLDEN FIL</button>
+          <button class="variant-btn" data-category="GOLDEN FIL">GOLDEN FIL</button>
         </div>
 
         <!-- ARROW BUTTON -->
@@ -487,10 +493,7 @@
         >
           <label class="font-semibold text-lg mb-3 block">Your Rating</label>
 
-          <div
-            id="starContainer"
-            class="flex gap-2 mb-6 text-2xl text-white"
-          >
+          <div id="starContainer" class="flex gap-2 mb-6 text-2xl text-white">
             <i
               class="fa-regular fa-star cursor-pointer border-[1px] border-[#fff8e5] p-2 rounded-[10px] px-[13px] md:px-4"
               data-value="1"
@@ -747,7 +750,7 @@
         </div>
 
         <!-- RIGHT SIDE -->
-        <div class="flex flex-col md:items-end mr-[40px] md:mr-0 gap-4 ">
+        <div class="flex flex-col md:items-end mr-[40px] md:mr-0 gap-4">
           <!-- Address Bar -->
           <div
             class="bg-[#c62828] text-white font-semibold px-4 py-2 rounded-md inline-flex items-center gap-2 shadow-md relative whitespace-nowrap"
@@ -783,7 +786,7 @@
         <img
           src="Properties/checker_3.png"
           alt="Checkerboard"
-          class="w-[1600px] mt-[17px] "
+          class="w-[1600px] mt-[17px]"
         />
       </div>
 
@@ -795,7 +798,42 @@
       </div>
     </footer>
 
-  <script src="script.js"></script>
-     
+    <div
+      class="menu-card relative w-[330px] cursor-pointer hover:scale-105 transition duration-300"
+    >
+      <!-- BACKGROUND PUTIH MIRE / FRAME -->
+      <img
+        src="Properties/Menu_Section/paper.png"
+        class="w-[310px] h-[310px] pointer-events-none"
+      />
+
+      <!-- GAMBAR PRODUK -->
+      <img
+        src="Properties/Menu_Section/choco_choco_card.png"
+        class="absolute top-[2px] w-[282px] h-auto rounded-[20px] object-cover pointer-events-none rotate-[-9deg]"
+      />
+
+      <!-- PAPERCLIP -->
+      <img
+        src="Properties/Menu_Section/clip.png"
+        class="absolute top-[-40px] right-16 w-[70px] pointer-events-none"
+      />
+
+      <!-- LABEL HARGA & NAMA PRODUK -->
+      <div
+        class="absolute bottom-4 right-4 text-[#0A2458] font-bold flex flex-col items-center pointer-events-none"
+      >
+        <span
+          class="text-[23px] leading-none bg-[#F6D932] px-4 py-2 rounded-[20px] shadow-md"
+          >Beef + Ham</span
+        >
+        <span
+          class="text-[23px] leading-none bg-[#F6D932] px-4 py-2 rounded-[20px] shadow-md transform -translate-y- -translate-x-[-50px]"
+          >20K</span
+        >
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>

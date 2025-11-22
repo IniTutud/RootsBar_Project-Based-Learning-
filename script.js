@@ -199,10 +199,14 @@
         calculateTotal();
       });
 
-      const menuData = {
+      // =======================
+// DATA PRODUK (DUMMY)
+// Bisa diganti kapanpun
+// =======================
+const menuData = {
         ASINAN: [
           {
-            img: "Properties/Menu_Section/beef_ham.png",
+            img: "Properties/Menu_Section/beef_ham_card.png",
             popupImg: "Properties/Menu_Section/beef_ham_popup.png",
             name: "Beef Ham",
             price: 15000,
@@ -216,7 +220,7 @@
           },
 
           {
-            img: "Properties/Menu_Section/beef_patties.png",
+            img: "Properties/Menu_Section/beef_patties_card.png",
             popupImg: "Properties/Menu_Section/beef_patties_popup.png",
             name: "Beef + Pattis",
             price: 21000,
@@ -233,7 +237,7 @@
 
         MANISAN: [
           {
-            img: "Properties/Menu_Section/choco_choco.png",
+            img: "Properties/Menu_Section/choco_choco_card.png",
             popupImg: "Properties/Menu_Section/choco_choco_popup.png",
             name: "Choco + Choco",
             price: 20000,
@@ -249,10 +253,10 @@
 
         "GOLDEN FIL": [
           {
-            img: "Properties/Menu_Section/beef_patties.png",
+            img: "Properties/Menu_Section/beef_patties_card.png",
             popupImg: "Properties/Menu_Section/beef_patties_popup.png",
             name: "Beef Sausage",
-            price: "27K",
+            price: "27000",
             description:
               "Rasa Beef + Patties adalah roti panggang gurih berisi daging beef lembut dan patties yang padat. Kamu mendapatkan perpaduan keju leleh dan saus yang menambah rasa. Isian dagingnya memberi pengalaman makan yang mantap dan cocok untuk kamu yang ingin pilihan roti panggang yang lebih mengenyangkan.",
             ingredients: [
@@ -265,60 +269,78 @@
         ],
       };
 
-      const buttons = document.querySelectorAll(".variant-btn");
-      const menuList = document.getElementById("menuList");
 
-      // Fungsi render menu
-      function renderMenu(category) {
-        const items = menuData[category];
-        menuList.innerHTML = items
-          .map(
-            (item) => `
-        <div class="menu-card">
-          <div class="relative w-[330px]">
-            <img src="${item.img}" alt="${item.name}" class="menu-img" />
-            <span class="paperclip"></span>
-          
-            
-            </div>
-          </div>
+
+// =======================
+// RENDER MENU ITEMS
+// =======================
+const menuList = document.getElementById("menuList");
+
+function renderMenu(category) {
+  const items = menuData[category];
+
+  menuList.innerHTML = items
+    .map(
+      (item) => `
+      <div 
+        class="menu-card relative w-[330px] cursor-pointer hover:scale-105 transition duration-300"
+        onclick='toggleMenuPopup(true, ${JSON.stringify(item)})'
+      >
+        <!-- FRAME -->
+        <img src="Properties/Menu_Section/paper.png"
+             class="w-[310px] h-[310px] pointer-events-none"/>
+
+        <!-- IMG PRODUK -->
+        <img src="${item.img}"
+             class="absolute top-[2px] w-[282px] rounded-[20px] object-cover pointer-events-none rotate-[-9deg]"/>
+
+        <!-- CLIP -->
+        <img src="Properties/Menu_Section/clip.png"
+             class="absolute top-[-40px] right-16 w-[70px] pointer-events-none"/>
+
+        <!-- TEXT LABEL -->
+        <div class="absolute bottom-4 right-4 text-[#0A2458] font-bold flex flex-col items-center pointer-events-none">
+          <span class="text-[23px] leading-none bg-[#F6D932] px-4 py-2 rounded-[20px] shadow-md"
+          >${item.name}</span>
+          <span  class="text-[23px] leading-none bg-[#F6D932] px-4 py-2 rounded-[20px] shadow-md transform -translate-y- -translate-x-[-50px]"
+          >${item.price / 1000}K</span>
         </div>
-      `
-          )
-          .join("");
-      }
 
-      // default tampilkan kategori pertama
-      renderMenu("ASINAN");
+      </div>
+    `
+    )
+    .join("");
+}
 
-      // event listener tombol
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          buttons.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          renderMenu(btn.textContent.trim());
-        });
-      });
 
-      function renderMenu(category) {
-        const items = menuData[category];
-        menuList.innerHTML = items
-          .map(
-            (item) => `
-            <div class="menu-card hover-bounce" onclick='toggleMenuPopup(true, ${JSON.stringify(
-              item
-            )})'>
-              <div class="relative w-[330px]">
-                <img src="${item.img}" alt="${item.name}" class="menu-img" />
-                <span class="paperclip"></span>
-              </div>
-            </div>
-          `
-          )
-          .join("");
-      }
+// =======================
+// BUTTON LOGIC
+// =======================
+const buttons = document.querySelectorAll(".variant-btn");
 
-      renderMenu("ASINAN");
+buttons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+
+    // Remove active class dari semuanya
+    buttons.forEach(b => b.classList.remove("active"));
+
+    // Tambah active ke tombol yang dipencet
+    btn.classList.add("active");
+
+    // Ambil kategori dari attribute data-category
+    const category = btn.dataset.category;
+
+    // Render ulang
+    renderMenu(category);
+  });
+});
+
+
+// Render default saat masuk halaman
+renderMenu("ASINAN");
+
+
+
 
       function toggleMenuPopup(show = false, item = null) {
         const popup = document.getElementById("menuPopup");

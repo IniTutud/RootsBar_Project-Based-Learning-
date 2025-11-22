@@ -308,7 +308,7 @@
             <div class="menu-card hover-bounce" onclick='toggleMenuPopup(true, ${JSON.stringify(
               item
             )})'>
-              <div class="relative w-[330px]">
+              <div class="relative w-[200px]">
                 <img src="${item.img}" alt="${item.name}" class="menu-img" />
                 <span class="paperclip"></span>
               </div>

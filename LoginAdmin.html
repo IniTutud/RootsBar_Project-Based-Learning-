@@ -6,42 +6,62 @@
   <title>ROOT'S BAR Login</title>
   <link rel="shortcut icon" href="Properties/logo.png" type="image/x-icon" />
   <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body class="font-serif bg-[#f8f2e2]">
+<body class="font-serif bg-[#0A2A78] overflow-hidden">
 
-  <div class="flex h-screen overflow-hidden">
-    <!-- Left Side -->
-    <div class="w-1/2 flex flex-col justify-center items-center bg-[#f8f2e2] relative">
-      <img src="logo.png" alt="Logo" class="w-36 mb-4">
-      <h1 class="text-4xl font-extrabold text-[#1e2b70]">ROOT'S BAR</h1>
-      <p class="text-[#d94f2b] text-sm mt-2">Roti Bakar Khas Bandung</p>
-    </div>
+  <style>
+    .clip-path-custom {
+  clip-path: polygon(0 0, 100% 0, 50% 200%, 0 100%);
+}
 
-    <!-- Right Side -->
-    <div class="w-1/2 bg-[#0b2a75] flex flex-col justify-center px-20 text-white relative">
-      <h2 class="text-2xl font-extrabold mb-8 tracking-wider text-center">LOGIN</h2>
+  </style>
 
-      <form class="flex flex-col space-y-4">
+ <div class="flex h-screen w-full">
 
-        <div>
-          <label class="text-xs font-semibold text-yellow-300">Your username</label>
-          <input type="text" placeholder="Username" class="w-full mt-1 p-2 rounded-full text-gray-700 placeholder-gray-400 focus:outline-none">
-        </div>
+  <!-- LEFT SIDE (CREAM + MIRING) -->
+  <div class="relative w-1/2 bg-[#F1E9D4] 
+              clip-path-custom
+              flex flex-col justify-center items-center p-10">
 
-        <div>
-          <label class="text-xs font-semibold text-yellow-300">Password</label>
-          <input type="password" placeholder="********" class="w-full mt-1 p-2 rounded-full text-gray-700 placeholder-gray-400 focus:outline-none">
-        </div>
-
-        <button type="submit" class="bg-[#d62828] text-white rounded-full py-2 font-semibold hover:bg-[#e63a3a] transition duration-200">Log in</button>
-      </form>
-
-      <!-- Checkerboard pattern -->
-      <div class="w-[1300px] absolute right-[300px] bottom-0">
-        <img src="checker.png" alt="" class="checker">
-      </div>
-    </div>
+    <img src="Properties/logo.png" class="w-48 mb-6">
+    <h1 class="text-5xl font-extrabold text-[#0A2A78]" style="font-family:'Cooper Black'">
+      ROOT'S BAR
+    </h1>
+    <p class="text-xl text-red-600 mt-2">Roti Bakar Khas Bandung</p>
   </div>
+
+  <!-- RIGHT SIDE (BLUE) -->
+  <div class="w-1/2 bg-[#0A2A78] flex flex-col justify-center px-20 text-white">
+
+    <h1 class="text-4xl font-extrabold text-center mb-10 text-[#F1e9D4]" style="font-family:'Cooper Black'">
+      LOGIN
+    </h1>
+
+    <label class="font-semibold text-[#F6D932]">Your username</label>
+    <input class="w-full mt-2 mb-5 p-4 rounded-full text-black bg-[#F1E9D4]"  placeholder="Username">
+
+    <label class="font-semibold text-[#F6D932]">Password</label>
+    <input class="w-full mt-2 mb-8 p-4 rounded-full text-black bg-[#F1E9D4]" type="password" placeholder="********">
+
+    <button class="w-[150px] bg-red-600 py-2 rounded-full font-bold hover:bg-red-700 transition text-[#F6D932] flex justify-center md:mx-[455px] ">
+      Log in
+    </button>
+
+  </div>
+</div>
+
+<img
+      src="Properties/checker_3.png"
+      alt="Checkerboard"
+      class=" absolute w-[1900px] md:w-full bottom-0 mt-[20px] mb-0 md:left-[565px] md:bottom-[-2px]"
+    />
+<img
+      src="Properties/checker.png"
+      alt="Checkerboard"
+      class=" absolute w-[1900px] md:w-full bottom-0 mt-[20px] mb-0 md:right-[940px] md:bottom-[px]"
+    />
+
 
 </body>
 </html>
