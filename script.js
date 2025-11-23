@@ -256,7 +256,7 @@ const menuData = {
             img: "Properties/Menu_Section/beef_patties_card.png",
             popupImg: "Properties/Menu_Section/beef_patties_popup.png",
             name: "Beef Sausage",
-            price: "27000",
+            price: 27000,
             description:
               "Rasa Beef + Patties adalah roti panggang gurih berisi daging beef lembut dan patties yang padat. Kamu mendapatkan perpaduan keju leleh dan saus yang menambah rasa. Isian dagingnya memberi pengalaman makan yang mantap dan cocok untuk kamu yang ingin pilihan roti panggang yang lebih mengenyangkan.",
             ingredients: [
