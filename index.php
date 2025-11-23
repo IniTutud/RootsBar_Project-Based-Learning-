@@ -1,3 +1,34 @@
+<?php
+$koneksi = new mysqli("localhost", "root", "", "rootsbar_db"); // sesuaikan nama DB
+
+if ($koneksi->connect_error) {
+    die("Koneksi gagal: " . $koneksi->connect_error);
+}
+
+$result = $koneksi->query("SELECT * FROM products ORDER BY category");
+
+$menuData = [];
+
+while ($row = $result->fetch_assoc()) {
+    $category = $row["category"];
+
+    if (!isset($menuData[$category])) {
+        $menuData[$category] = [];
+    }
+
+    $menuData[$category][] = [
+       "img" => $row["img"],
+        "name" => $row["name"],
+        "price" => intval($row["price"]),
+        "description" => $row["description"],
+        "ingredients" => $row["img"]
+    ];
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -800,6 +831,10 @@
     </footer>
 
     
-    <script src="script.js"></script>
+   <script>
+    const menuData = <?php echo json_encode($menuData); ?>;
+</script>
+
+<script src="script.js"></script>
   </body>
 </html>

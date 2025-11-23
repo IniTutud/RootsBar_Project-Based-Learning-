@@ -203,141 +203,82 @@
 // DATA PRODUK (DUMMY)
 // Bisa diganti kapanpun
 // =======================
-const menuData = {
-        ASINAN: [
-          {
-            img: "Properties/Menu_Section/beef_ham_card.png",
-            popupImg: "Properties/Menu_Section/beef_ham_popup.png",
-            name: "Beef Ham",
-            price: 15000,
-            description:
-              "Roti Bakar Beef Ham adalah roti bakar premium yang diisi dengan irisan daging sapi asap (beef ham), keju leleh, dan saus spesial. Untuk menciptakan rasa yang lezat dan khas, Roti Bakar Beef Ham dibuat dari bahan-bahan pilihan berkualitas tinggi.",
-            ingredients: [
-              "Properties/Ingredients/bread.png",
-              "Properties/Ingredients/ham.png",
-              "Properties/Ingredients/lettuce.png",
-            ],
-          },
 
-          {
-            img: "Properties/Menu_Section/beef_patties_card.png",
-            popupImg: "Properties/Menu_Section/beef_patties_popup.png",
-            name: "Beef + Pattis",
-            price: 21000,
-            description:
-              "Rasa Beef + Patties adalah roti panggang gurih berisi daging beef lembut dan patties yang padat. Kamu mendapatkan perpaduan keju leleh dan saus yang menambah rasa. Isian dagingnya memberi pengalaman makan yang mantap dan cocok untuk kamu yang ingin pilihan roti panggang yang lebih mengenyangkan.",
-            ingredients: [
-              "Properties/Ingredients/bread.png",
-              "Properties/Ingredients/ham.png",
-              "Properties/Ingredients/lettuce.png",
-              "Properties/Ingredients/beef.png",
-            ],
-          },
-        ],
-
-        MANISAN: [
-          {
-            img: "Properties/Menu_Section/choco_choco_card.png",
-            popupImg: "Properties/Menu_Section/choco_choco_popup.png",
-            name: "Choco + Choco",
-            price: 20000,
-            description:
-              "Rasa Choco + Choco adalah roti panggang manis dengan olesan cokelat lembut dan tambahan cokelat tebal yang membuat rasanya kaya. Kamu merasakan roti yang hangat dengan tekstur renyah dan aroma cokelat yang kuat. Roti ini cocok untuk kamu yang ingin sajian manis dengan cita rasa cokelat ganda.",
-            ingredients: [
-              "Properties/Ingredients/bread.png",
-              "Properties/Ingredients/choco.png",
-              "Properties/Ingredients/chocos.png",
-            ],
-          },
-        ],
-
-        "GOLDEN FIL": [
-          {
-            img: "Properties/Menu_Section/beef_patties_card.png",
-            popupImg: "Properties/Menu_Section/beef_patties_popup.png",
-            name: "Beef Sausage",
-            price: 27000,
-            description:
-              "Rasa Beef + Patties adalah roti panggang gurih berisi daging beef lembut dan patties yang padat. Kamu mendapatkan perpaduan keju leleh dan saus yang menambah rasa. Isian dagingnya memberi pengalaman makan yang mantap dan cocok untuk kamu yang ingin pilihan roti panggang yang lebih mengenyangkan.",
-            ingredients: [
-              "Properties/Ingredients/bread.png",
-              "Properties/Ingredients/lettuce.png",
-              "Properties/Ingredients/ham.png",
-              "Properties/Ingredients/beef.png",
-            ],
-          },
-        ],
-      };
 
 
 
 // =======================
 // RENDER MENU ITEMS
 // =======================
-const menuList = document.getElementById("menuList");
+const buttons = document.querySelectorAll(".variant-btn");
+
+buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const category = btn.getAttribute("data-category");
+        renderMenu(category);
+    });
+});
+
 
 function renderMenu(category) {
-  const items = menuData[category];
+    fetch("get_products.php?category=" + encodeURIComponent(category))
+        .then(res => res.json())
+        .then(data => {
 
-  menuList.innerHTML = items
-    .map(
-      (item) => `
-      <div 
-        class="menu-card relative w-[330px] cursor-pointer hover:scale-105 transition duration-300"
-        onclick='toggleMenuPopup(true, ${JSON.stringify(item)})'
-      >
-        <!-- FRAME -->
-        <img src="Properties/Menu_Section/paper.png"
-             class="w-[310px] h-[310px] pointer-events-none"/>
+            const container = document.getElementById("menuList");
+            container.innerHTML = "";
 
-        <!-- IMG PRODUK -->
-        <img src="${item.img}"
-             class="absolute top-[2px] w-[282px] rounded-[20px] object-cover pointer-events-none rotate-[-9deg]"/>
+            data.forEach(item => {
 
-        <!-- CLIP -->
-        <img src="Properties/Menu_Section/clip.png"
-             class="absolute top-[-40px] right-16 w-[70px] pointer-events-none"/>
+                const card = `
+                <div 
+                    class="menu-card relative w-[330px] cursor-pointer hover:scale-105 transition duration-300"
+                    onclick='toggleMenuPopup(true, ${JSON.stringify(item)})'
+                >
+                    <!-- FRAME -->
+                    <img src="Properties/Menu_Section/paper.png"
+                        class="w-[310px] h-[310px] pointer-events-none"/>
 
-        <!-- TEXT LABEL -->
-        <div class="absolute bottom-4 right-4 text-[#0A2458] font-bold flex flex-col items-center pointer-events-none">
-          <span class="text-[23px] leading-none bg-[#F6D932] px-4 py-2 rounded-[20px] shadow-md"
-          >${item.name}</span>
-          <span  class="text-[23px] leading-none bg-[#F6D932] px-4 py-2 rounded-[20px] shadow-md transform -translate-y- -translate-x-[-50px]"
-          >${item.price / 1000}K</span>
-        </div>
+                    <!-- PRODUK IMG -->
+                    <img src="${item.img}"
+                        class="absolute top-[2px] w-[282px] rounded-[20px] object-cover pointer-events-none rotate-[-9deg]"/>
 
-      </div>
-    `
-    )
-    .join("");
+                    <!-- CLIP -->
+                    <img src="Properties/Menu_Section/clip.png"
+                        class="absolute top-[-40px] right-16 w-[70px] pointer-events-none"/>
+
+                    <!-- TEXT LABEL -->
+                    <div class="absolute bottom-4 right-4 text-[#0A2458] font-bold flex flex-col items-center pointer-events-none">
+                        <span class="text-[23px] leading-none bg-[#F6D932] px-4 py-2 rounded-[20px] shadow-md">
+                            ${item.name}
+                        </span>
+
+                        <span class="text-[23px] leading-none bg-[#F6D932] px-4 py-2 rounded-[20px] shadow-md mt-1">
+                            ${Math.round(item.price / 1000)}K
+                        </span>
+                    </div>
+                </div>
+                `;
+
+                container.innerHTML += card;
+            });
+        });
 }
 
 
 // =======================
 // BUTTON LOGIC
 // =======================
-const buttons = document.querySelectorAll(".variant-btn");
-
-buttons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-
-    // Remove active class dari semuanya
-    buttons.forEach(b => b.classList.remove("active"));
-
-    // Tambah active ke tombol yang dipencet
-    btn.classList.add("active");
-
-    // Ambil kategori dari attribute data-category
-    const category = btn.dataset.category;
-
-    // Render ulang
-    renderMenu(category);
-  });
-});
 
 
 // Render default saat masuk halaman
-renderMenu("ASINAN");
+document.addEventListener("DOMContentLoaded", () => {
+    renderMenu("ASINAN");
+});
+
 
 
 
