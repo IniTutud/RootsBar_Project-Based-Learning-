@@ -36,22 +36,36 @@
   <!-- RIGHT SIDE (BLUE) -->
   <div class="w-1/2 bg-[#0A2A78] flex flex-col justify-center px-20 text-white">
 
-    <h1 class="text-4xl font-extrabold text-center mb-10 text-[#F1e9D4]" style="font-family:'Cooper Black'">
-      LOGIN
-    </h1>
+  <form action="login_process.php" method="POST">
 
-    <label class="font-semibold text-[#F6D932]">Your username</label>
-    <input class="w-full mt-2 mb-5 p-4 rounded-full text-black bg-[#F1E9D4]"  placeholder="Username">
+  <label class="font-semibold text-[#F6D932]">Your username</label>
+  <input name="username" required
+    class="w-full mt-2 mb-5 p-4 rounded-full text-black bg-[#F1E9D4]"
+    placeholder="Username">
 
-    <label class="font-semibold text-[#F6D932]">Password</label>
-    <input class="w-full mt-2 mb-8 p-4 rounded-full text-black bg-[#F1E9D4]" type="password" placeholder="********">
+  <label class="font-semibold text-[#F6D932]">Password</label>
+  <input name="password" required
+    class="w-full mt-2 mb-8 p-4 rounded-full text-black bg-[#F1E9D4]"
+    type="password" placeholder="********">
 
-    <button class="w-[150px] bg-red-600 py-2 rounded-full font-bold hover:bg-red-700 transition text-[#F6D932] flex justify-center md:mx-[455px] ">
-      Log in
-    </button>
+  <button type="submit"
+    class="w-[150px] bg-red-600 py-2 rounded-full font-bold hover:bg-red-700 transition text-[#F6D932] flex justify-center md:mx-[455px]">
+    Log in
+  </button>
 
+  <?php if(isset($_GET["error"])): ?>
+    <p class="text-red-400 mt-4 font-semibold text-center">
+      <?= htmlspecialchars($_GET["error"]) ?>
+    </p>
+  <?php endif; ?>
+
+</form>
+   
   </div>
 </div>
+
+
+
 
 <img
       src="Properties/checker_3.png"

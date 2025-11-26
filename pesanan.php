@@ -28,7 +28,7 @@
       </div>
 
       <nav class="space-y-2 px-3">
-        <a href="dashboardadmin.html" class="flex items-center gap-3 py-3 px-6 text-white hover:bg-white hover:text-[#1e3a8a] rounded-full font-semibold transition">
+        <a href="dashboardadmin.php" class="flex items-center gap-3 py-3 px-6 text-white hover:bg-white hover:text-[#1e3a8a] rounded-full font-semibold transition">
           <i class="fas fa-th-large"></i>
           <span>Dashboard</span>
         </a>
@@ -38,7 +38,7 @@
           <span>Pesanan</span>
         </a>
 
-        <a href="produk.html" class="flex items-center gap-3 py-3 px-6 text-white hover:bg-white hover:text-[#1e3a8a] rounded-full font-semibold transition">
+        <a href="produk.php" class="flex items-center gap-3 py-3 px-6 text-white hover:bg-white hover:text-[#1e3a8a] rounded-full font-semibold transition">
           <i class="fas fa-box"></i>
           <span>Manajemen Produk</span>
         </a>
@@ -107,7 +107,7 @@
               <span class="bg-green-500 text-white px-5 py-1.5 rounded-full text-xs font-bold inline-block">COMPLETED</span>
             </span>
              <!-- LINK DETAIL -->
-           <a href="detailpesanan.html" class="text-blue-300 cursor-pointer hover:text-white transition">
+           <a href="detailpesanan.php" class="text-blue-300 cursor-pointer hover:text-white transition">
             Lihat Detail
      </a>
       </div>
@@ -175,7 +175,7 @@
   function confirmLogout() {
     closeLogoutPopup();
     setTimeout(() => {
-      window.location.href = "LoginAdmin.html"; // arahkan ke halaman login kamu
+      window.location.href = "LoginAdmin.php"; // arahkan ke halaman login kamu
     }, 300);
   }
 </script>

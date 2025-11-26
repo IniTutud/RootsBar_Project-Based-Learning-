@@ -8,6 +8,9 @@ $result = mysqli_query($conn, $sql);
 if (!$result) {
   die("Query Error : " . mysqli_error($conn));
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -40,17 +43,17 @@ if (!$result) {
 
         <!-- MENU -->
         <nav class="space-y-3 px-4">
-          <a href="dashboardadmin.html"
+          <a href="dashboardadmin.php"
             class="flex items-center gap-3 py-3 px-5 text-white hover:bg-white hover:text-[#001A70] rounded-full font-semibold transition">
             <i class="fas fa-th-large"></i> Dashboard
           </a>
 
-          <a href="pesanan.html"
+          <a href="pesanan.php"
             class="flex items-center gap-3 py-3 px-5 text-white hover:bg-white hover:text-[#001A70] rounded-full font-semibold transition">
             <i class="fas fa-shopping-bag"></i> Pesanan
           </a>
 
-          <a href="produk.html"
+          <a href="produk.php"
             class="flex items-center gap-3 py-3 px-5 bg-white text-[#001A70] rounded-full font-semibold shadow-md">
             <i class="fas fa-box"></i> Manajemen Produk
           </a>
@@ -66,28 +69,28 @@ if (!$result) {
     </aside>
 
     <!-- DELETE POPUP -->
- <div id="trashPopup" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50">
-  <div class="bg-red-600 p-6 rounded-3xl text-center w-[320px] shadow-xl">
+    <div id="trashPopup" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50">
+      <div class="bg-red-600 p-6 rounded-3xl text-center w-[320px] shadow-xl">
 
-    <img src="Properties/kuceng.png" class="w-52 mx-auto mb-4" />
+        <img src="Properties/kuceng.png" class="w-52 mx-auto mb-4" />
 
-    <h2 class="text-2xl font-bold mb-2">Are you sure?</h2>
-    <p class="text-sm mb-5">
-      Deleting a Product will permanently remove it from your system
-    </p>
+        <h2 class="text-2xl font-bold mb-2">Are you sure?</h2>
+        <p class="text-sm mb-5">
+          Deleting a Product will permanently remove it from your system
+        </p>
 
-    <input type="hidden" id="deleteProductId">
+        <input type="hidden" id="deleteProductId">
 
-    <div class="flex justify-center gap-3">
-      <button onclick="closePopup()" class="px-4 py-2 bg-white text-black rounded-lg font-semibold">
-        No, keep product
-      </button>
-      <button onclick="confirmDelete()" class="px-4 py-2 bg-black/20 rounded-lg font-semibold text-white">
-        Yes, remove product
-      </button>
+        <div class="flex justify-center gap-3">
+          <button onclick="closePopup()" class="px-4 py-2 bg-white text-black rounded-lg font-semibold">
+            No, keep product
+          </button>
+          <button onclick="confirmDelete()" class="px-4 py-2 bg-black/20 rounded-lg font-semibold text-white">
+            Yes, remove product
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
 
     <!-- MAIN CONTENT -->
@@ -224,69 +227,83 @@ if (!$result) {
     </div>
   </div>
 
+
   <!-- EDIT PRODUCT POPUP -->
   <div id="editProductPopup"
-    class="fixed inset-0 backdrop-blur hidden items-center justify-center z-50 transition-all duration-300">
-    <div id="editProductBox" class="bg-[#102F76] w-[90%] max-w-4xl rounded-3xl p-8 relative">
-      <!-- CLOSE BUTTON -->
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-[9999]">
+
+    <div id="editProductBox"
+      class="bg-[#102F76] w-[90%] max-w-4xl rounded-3xl p-8 relative opacity-0 scale-95 transition-all">
+
       <button onclick="closeEditPopup()" class="absolute right-5 top-5 text-white text-2xl hover:text-red-400">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <!-- TITLE -->
       <h2 class="text-3xl font-extrabold text-white mb-6 flex items-center gap-2">
         <img src="Properties/Menu_Section/bintang.png" class="w-[30px] mb-[30px]" />
         Edit Menu
         <img src="Properties/Menu_Section/bintang.png" class="w-[30px] mt-[30px]" />
       </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- LEFT : IMAGE INPUT -->
+      <form action="update_product.php" method="POST" enctype="multipart/form-data"
+        class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <input type="hidden" name="id" id="edit_id">
+
         <div class="flex flex-col items-center">
-          <div class="w-56 h-56 bg-[#0a1f4a] rounded-xl flex items-center justify-center text-white text-lg">
-            Change 1:1 Picture
+
+          <div id="editImagePreview"
+            class="w-56 h-56 bg-[#0a1f4a] rounded-xl flex items-center justify-center text-white text-sm">
+            Loading...
           </div>
 
-          <input type="file"
-            class="mt-4 text-sm text-white file:bg-yellow-300 file:border-0 file:px-4 file:py-4 file:rounded-full file:text-[#001A70] file:font-bold" />
+          <input type="file" name="image"
+            class="mt-4 text-sm text-white file:bg-yellow-300 file:px-4 file:py-4 file:rounded-full" />
+
+          <div id="editIngredientPreview"
+            class="w-20 h-20 bg-[#0a1f4a] rounded-xl mt-6 flex items-center justify-center text-white text-xs">
+            Loading...
+          </div>
+
+          <input type="file" name="ingredients"
+            class="mt-4 text-sm text-white file:bg-yellow-300 file:px-4 file:py-4 file:rounded-full" />
         </div>
 
-        <!-- RIGHT : FORM -->
         <div>
-          <label class="text-[#F6D932] font-semibold">Nama Produk</label>
-          <input type="text" placeholder="Beef Ham"
-            class="w-full mt-1 mb-4 p-3 rounded-lg bg-[#102F76] border border-[#F1E9D4] text-white" />
 
-          <label class="text-[#F6D932] font-semibold">Deskripsi</label>
-          <input type="text"
-            placeholder="Rasa Beef + Patties adalah roti panggang gurih berisi daging beef lembut dan patties yang padat. Kamu mendapatkan perpaduan keju leleh dan saus yang menambah rasa. Isian dagingnya memberi pengalaman makan yang mantap dan cocok untuk kamu yang ingin pilihan roti panggang yang lebih mengenyangkan."
+          <label class="text-[#F6D932] font-semibold">Nama Produk</label>
+          <input type="text" name="name" id="edit_name"
             class="w-full mt-1 mb-4 p-3 rounded-lg bg-[#102F76] border border-[#F1E9D4] text-white" />
 
           <label class="text-[#F6D932] font-semibold">Kategori</label>
-          <select class="w-full mt-1 mb-4 p-3 rounded-lg bg-[#102F76] text-white border border-[#F1E9D4]">
-            <option>Select a Category</option>
+          <select name="category" id="edit_category"
+            class="w-full mt-1 mb-4 p-3 rounded-lg bg-[#102F76] border border-[#F1E9D4] text-white">
             <option>Asinan</option>
             <option>Manisan</option>
             <option>Golden Fil</option>
           </select>
 
           <label class="text-[#F6D932] font-semibold">Price</label>
-          <input type="text" placeholder="Rp. 15.000"
-            class="w-full mt-1 mb-6 p-3 rounded-lg bg-[#102F76] text-white border border-[#F1E9D4]" />
+          <input type="number" name="price" id="edit_price"
+            class="w-full mt-1 mb-4 p-3 rounded-lg bg-[#102F76] border border-[#F1E9D4] text-white" />
 
-          <button onclick="showSuccessNotif()"
-            class="bg-yellow-400 px-10 py-3 rounded-xl font-bold text-[#001A70] hover:bg-yellow-300 transition flex justify-end">
+          <label class="text-[#F6D932] font-semibold">Description</label>
+          <textarea name="description" id="edit_description"
+            class="w-full mt-1 mb-4 p-3 rounded-lg bg-[#102F76] border border-[#F1E9D4] text-white"></textarea>
+
+          <button type="submit"
+            class="bg-yellow-400 px-10 py-3 rounded-xl font-bold text-[#001A70] hover:bg-yellow-300">
             Save
           </button>
+
         </div>
-      </div>
+
+      </form>
+
     </div>
   </div>
 
-  <div id="notifSuccess" class="fixed bottom-6 right-6 bg-green-500 text-white font-bold px-6 py-3 rounded-xl shadow-xl
-            opacity-0 translate-y-4 transition-all duration-300 z-[999]">
-    Produk berhasil ditambahkan!
-  </div>
+
 
   <div id="logoutPopup" class="fixed inset-0 hidden z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">
 
@@ -324,21 +341,21 @@ if (!$result) {
 
   <script>
     const trashPopup = document.getElementById("trashPopup");
-  const deleteProductId = document.getElementById("deleteProductId");
+    const deleteProductId = document.getElementById("deleteProductId");
 
-  function openDeletePopup(id) {
-    deleteProductId.value = id;
-    trashPopup.classList.remove("hidden");
-  }
+    function openDeletePopup(id) {
+      deleteProductId.value = id;
+      trashPopup.classList.remove("hidden");
+    }
 
-  function closePopup() {
-    trashPopup.classList.add("hidden");
-  }
+    function closePopup() {
+      trashPopup.classList.add("hidden");
+    }
 
-  function confirmDelete() {
-    const id = deleteProductId.value;
-    window.location.href = "delete_product.php?id=" + id;
-  }
+    function confirmDelete() {
+      const id = deleteProductId.value;
+      window.location.href = "delete_product.php?id=" + id;
+    }
 
     function openAddPopup() {
       document.getElementById("addProductPopup").classList.remove("hidden");
@@ -376,37 +393,9 @@ if (!$result) {
       }, 300); // tunggu popup selesai animasinya
     }
 
-    function openEditPopup() {
-      const popup = document.getElementById("editProductPopup");
-      const box = document.getElementById("editProductBox");
 
-      popup.classList.remove("hidden");
-      popup.classList.add("flex");
 
-      // animasi muncul
-      setTimeout(() => {
-        box.classList.add("opacity-100", "scale-100");
-        box.classList.remove("opacity-0", "scale-95");
-      }, 10);
-    }
 
-    function closeEditPopup() {
-      const popup = document.getElementById("editProductPopup");
-      const box = document.getElementById("editProductBox");
-
-      // animasi keluar
-      box.classList.add("opacity-0", "scale-95");
-      box.classList.remove("opacity-100", "scale-100");
-
-      setTimeout(() => {
-        popup.classList.add("hidden");
-        popup.classList.remove("flex");
-
-        // reset biar popup bisa muncul lagi normal
-        box.classList.remove("opacity-0", "scale-95");
-        box.classList.add("opacity-100", "scale-100");
-      }, 300);
-    }
 
     function showSuccessNotif() {
       // Nutup popup edit dulu
@@ -451,23 +440,78 @@ if (!$result) {
     function confirmLogout() {
       closeLogoutPopup();
       setTimeout(() => {
-        window.location.href = "LoginAdmin.html"; // arahkan ke halaman login kamu
+        window.location.href = "LoginAdmin.php"; // arahkan ke halaman login kamu
       }, 300);
     }
   </script>
 
   <script>
-  // CEK JIKA URL ADA ?msg=added
-  const urlParams = new URLSearchParams(window.location.search);
-  const msg = urlParams.get("msg");
+    // CEK JIKA URL ADA ?msg=added
+    const urlParams = new URLSearchParams(window.location.search);
+    const msg = urlParams.get("msg");
 
-  if (msg === "added") {
-    showSuccessNotif();
+    if (msg === "added") {
+      showSuccessNotif();
 
-    // hapus parameter dari URL biar notif tidak muncul lagi saat refresh
-    window.history.replaceState({}, document.title, "produk.php");
-  }
-</script>
+      // hapus parameter dari URL biar notif tidak muncul lagi saat refresh
+      window.history.replaceState({}, document.title, "produk.php");
+    }
+
+    function openEditPopup(id) {
+      fetch("get_product.php?id=" + id)
+        .then(res => res.json())
+        .then(data => {
+
+          // SET VALUE FORM
+          document.getElementById("edit_id").value = data.id;
+          document.getElementById("edit_name").value = data.name;
+          document.getElementById("edit_category").value = data.category;
+          document.getElementById("edit_price").value = data.price;
+          document.getElementById("edit_description").value = data.description;
+
+          // PREVIEW GAMBAR
+          document.getElementById("editImagePreview").innerHTML = `
+          <img src="${data.img}" class="w-56 h-56 object-cover rounded-xl">
+      `;
+
+          document.getElementById("editIngredientPreview").innerHTML = `
+          <img src="${data.ingredients}" class="w-20 h-20 object-cover rounded-xl">
+      `;
+
+          // OPEN POPUP
+          const popup = document.getElementById("editProductPopup");
+          const box = document.getElementById("editProductBox");
+
+          popup.classList.remove("hidden");
+          popup.classList.add("flex");
+
+          setTimeout(() => {
+            box.classList.add("opacity-100", "scale-100");
+            box.classList.remove("opacity-0", "scale-95");
+          }, 10);
+        });
+    }
+
+    function closeEditPopup() {
+      const popup = document.getElementById("editProductPopup");
+      const box = document.getElementById("editProductBox");
+
+      box.classList.add("opacity-0", "scale-95");
+      box.classList.remove("opacity-100", "scale-100");
+
+      setTimeout(() => {
+        popup.classList.add("hidden");
+        popup.classList.remove("flex");
+
+        // RESET TRANSITION
+        box.classList.remove("opacity-0", "scale-95");
+        box.classList.add("opacity-100", "scale-100");
+      }, 300);
+    }
+
+  </script>
+
 </body>
+
 
 </html>

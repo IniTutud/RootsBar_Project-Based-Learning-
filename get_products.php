@@ -1,30 +1,32 @@
 <?php
-header("Content-Type: application/json");
 include "config/db.php";
 
-$category = isset($_GET["category"]) ? $_GET["category"] : null;
-
-if ($category) {
-    $stmt = $conn->prepare("SELECT * FROM products WHERE category = ? ORDER BY id DESC");
-    $stmt->bind_param("s", $category);
-    $stmt->execute();
-    $result = $stmt->get_result();
-} else {
-    $result = $conn->query("SELECT * FROM products ORDER BY id DESC");
+if (!isset($_GET["category"])) {
+    echo json_encode([]);
+    exit;
 }
 
-$data = [];
+$cat = $_GET["category"];
 
-while ($row = $result->fetch_assoc()) {
+// Samakan format CATEGORY agar selalu UPPERCASE
+$cat = strtoupper($cat);
+
+// Ambil produk sesuai kategori
+$sql = "SELECT * FROM products WHERE UPPER(category) = '$cat'";
+$q = mysqli_query($conn, $sql);
+
+$data = [];
+while ($row = mysqli_fetch_assoc($q)) {
     $data[] = [
-        "id"          => $row["id"],
-        "name"        => $row["name"],
-        "category"    => $row["category"],
-        "price"       => intval($row["price"]),
-        "img"         => $row["img"],
+        "id" => $row["id"],
+        "name" => $row["name"],
+        "price" => $row["price"],
+        "img" => $row["img"],
         "description" => $row["description"],
-        "ingredients" => $row["ingredients"]
+        // INGREDIENTS itu GAMBAR SATUAN — bukan array
+        "ingredients" => [$row["ingredients"]]
     ];
 }
 
 echo json_encode($data);
+?>

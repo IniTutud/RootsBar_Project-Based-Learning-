@@ -1,4 +1,9 @@
 <?php include "config/db.php"; 
+session_start();
+if (!isset($_SESSION["admin_id"])) {
+    header("Location: LoginAdmin.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +37,11 @@
             <i class="fas fa-th-large"></i>
             <span>Dashboard</span>
           </a>
-          <a href="pesanan.html" class="flex items-center gap-3 py-3 px-6 text-white hover:bg-white hover:text-[#1e3a8a] rounded-full font-semibold transition">
+          <a href="pesanan.php" class="flex items-center gap-3 py-3 px-6 text-white hover:bg-white hover:text-[#1e3a8a] rounded-full font-semibold transition">
             <i class="fas fa-shopping-bag"></i>
             <span>Pesanan</span>
           </a>
-          <a href="produk.html" class="flex items-center gap-3 py-3 px-6 text-white hover:bg-white hover:text-[#1e3a8a] rounded-full font-semibold transition">
+          <a href="produk.php" class="flex items-center gap-3 py-3 px-6 text-white hover:bg-white hover:text-[#1e3a8a] rounded-full font-semibold transition">
             <i class="fas fa-box"></i>
             <span>Manajemen Produk</span>
           </a>

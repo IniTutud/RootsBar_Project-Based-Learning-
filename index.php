@@ -259,7 +259,7 @@ while ($row = $result->fetch_assoc()) {
         >
           Our Menu
         </h1>
-        <a href="LoginAdmin.html">
+        <a href="LoginAdmin.php">
           <img
             src="Properties/Menu_Section/bintang.png"
             class="w-[30px] mb-[60px]"

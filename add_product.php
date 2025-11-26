@@ -20,16 +20,23 @@ if (!empty($_FILES['image']['name'])) {
 }
 
 // ========== UPLOAD INGREDIENTS (gambar) ==========
-$ingredientsPath = "none";
+$ingredientFiles = [];
 
-if (!empty($_FILES['ingredients']['name'])) {
-    $filename2 = time() . "_ING_" . basename($_FILES['ingredients']['name']);
-    $target2 = "uploads/" . $filename2;
+foreach ($_FILES["ingredients"]["name"] as $index => $name) {
 
-    if (move_uploaded_file($_FILES['ingredients']['tmp_name'], $target2)) {
-        $ingredientsPath = $target2;
+    if ($name === "") continue; // skip kosong
+
+    $filename = time() . "_ING_" . basename($name);
+    $target = "uploads/" . $filename;
+
+    if (move_uploaded_file($_FILES["ingredients"]["tmp_name"][$index], $target)) {
+        $ingredientFiles[] = $target;
     }
 }
+
+// Simpan KE DATABASE DALAM BENTUK JSON
+$ingredientsPath = json_encode($ingredientFiles);
+
 
 // ========== MASUK DB ==========
 $sql = "INSERT INTO products (name, category, price, img, description, ingredients)
