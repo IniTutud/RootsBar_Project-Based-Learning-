@@ -1,127 +1,235 @@
-      // ===== INITIAL RATING DATA =====
-      let ratingCounts = [1, 2, 3, 4, 57]; // ★ → ★★★★★★
-      let totalReviews = ratingCounts.reduce((a, b) => a + b, 0);
-      let totalStars = ratingCounts.reduce(
-        (sum, count, i) => sum + count * (i + 1),
-        0
-      );
+     
+/// =============================================
+// INITIAL RATING STATE
+// =============================================
+let ratingCounts = [0, 0, 0, 0, 0];
 
-      // ===== CHART SETUP =====
-      const ctx = document.getElementById("ratingChart").getContext("2d");
-      const ratingChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: ["★", "★★", "★★★", "★★★★", "★★★★★"],
-          datasets: [
+// =============================================
+// SETUP CHART (KOSONG DULU)
+// =============================================
+const ctx = document.getElementById("ratingChart").getContext("2d");
+
+const ratingChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: ["★", "★★", "★★★", "★★★★", "★★★★★"],
+        datasets: [
             {
-              data: ratingCounts,
-              backgroundColor: "#ffffff",
-              borderRadius: 8,
-              barPercentage: 0.6,
+                label: "Jumlah Rating",
+                data: ratingCounts,
+                backgroundColor: "#ffffff",
+                borderRadius: 8,
+                barPercentage: 0.6,
             },
-          ],
-        },
-        options: {
-          scales: {
+        ],
+    },
+    options: {
+        scales: {
             x: {
-              grid: { display: false },
-              ticks: {
-                color: "#FFD700",
-                font: { size: 14, weight: "bold" },
-              },
+                grid: { display: false },
+                ticks: {
+                    color: "#FFD700",
+                    font: { size: 14, weight: "bold" },
+                },
             },
             y: {
-              grid: { color: "rgba(255,255,255,0.2)" },
-              ticks: {
-                color: "#ffffff",
-                stepSize: 4,
-              },
+                grid: { color: "rgba(255,255,255,0.2)" },
+                ticks: {
+                    color: "#ffffff",
+                    stepSize: 1,
+                    beginAtZero: true,
+                },
             },
-          },
-          plugins: { legend: { display: false } },
         },
-      });
+        plugins: { legend: { display: false } },
+    },
+});
 
-      // ===== UPDATE AVERAGE DISPLAY =====
-      function updateAverage() {
-        totalReviews = ratingCounts.reduce((a, b) => a + b, 0);
-        totalStars = ratingCounts.reduce(
-          (sum, count, i) => sum + count * (i + 1),
-          0
-        );
-        const avg = totalStars / totalReviews;
-        document.getElementById("avgScore").textContent = avg.toFixed(1);
-        document.getElementById("reviewCount").textContent =
-          totalReviews + " Reviews";
+// =============================================
+// FETCH GRAPH DATA FROM DB
+// =============================================
+function loadRatingGraph() {
+    fetch("get_rating_stats.php")
+        .then((r) => r.json())
+        .then((data) => {
+            ratingCounts = data;
+            updateChart();
+            updateAverage();
+        })
+        .catch((err) => console.error("Graph ERR:", err));
+}
 
-        // update stars
-        const starContainer = document.getElementById("avgStars");
-        starContainer.innerHTML = "";
-        for (let i = 1; i <= 5; i++) {
-          const star = document.createElement("span");
-          star.textContent = "★";
-          star.classList.add(
-            i <= Math.round(avg) ? "text-yellow-400" : "text-gray-400",
-            "text-xl"
-          );
-          starContainer.appendChild(star);
-        }
-      }
+// Panggil pertama kali
+loadRatingGraph();
 
-      updateAverage();
+// =============================================
+// Update Chart
+// =============================================
+function updateChart() {
+    ratingChart.data.datasets[0].data = ratingCounts;
+    ratingChart.update();
+}
 
-      // ===== STAR RATING FORM =====
-      const stars = document.querySelectorAll("#starContainer i");
-      let selectedStars = 0;
 
-      stars.forEach((star) => {
-        star.addEventListener("mouseover", () => {
-          const val = parseInt(star.dataset.value);
-          highlightStars(val);
-        });
-        star.addEventListener("mouseleave", () => {
-          highlightStars(selectedStars);
-        });
-        star.addEventListener("click", () => {
-          selectedStars = parseInt(star.dataset.value);
-          highlightStars(selectedStars);
-        });
-      });
+// =============================
+// FETCH REVIEW CARDS
+// =============================
+fetch("get_reviews.php")
+    .then(r => r.json())
+    .then(reviews => renderReviewCards(reviews));
 
-      function highlightStars(count) {
-        stars.forEach((s, i) => {
-          if (i < count) {
-            s.classList.remove("fa-regular", "text-gray-400");
+function renderReviewCards(reviews) {
+    const container = document.querySelector(".flex.flex-wrap.justify-center.gap-1");
+    container.innerHTML = "";
+
+    if (!reviews || reviews.length === 0) return;
+
+    // Acak urutan review
+    reviews.sort(() => Math.random() - 0.5);
+
+    // Ambil 4 teratas (random hasil shuffle)
+    const limited = reviews.slice(0, 4);
+
+    limited.forEach(r => {
+        // Random rotate untuk card aesthetic
+        const rotate = (Math.random() * 8 - 4).toFixed(1); // -4° sampai +4°
+        const offsetY = (Math.random() * 10 - 5).toFixed(1); // naik turun 5px
+
+        container.innerHTML += `
+        <div
+            class="bg-[url('Properties/Menu_Section/paper.png')] bg-cover bg-no-repeat text-black rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 pb-40 relative transition-transform duration-300 hover:scale-[1.03] border-4"
+            style="transform: rotate(${rotate}deg) translateY(${offsetY}px);"
+        >
+
+        <img src="Properties/Menu_Section/clip.png"
+             class="w-[80px] absolute top-[-20px] left- transform -translate-x-1/2 pointer-events-none"/>
+            <div class="mt-[40px] ml-[30px]">
+              <div class="flex gap-1 text-yellow-400 mb-2 text-lg">
+                ${"★".repeat(r.stars)}
+              </div>
+
+              <p class="text-sm leading-snug mb-6 pt-[7px]">${r.review}</p>
+
+              <div class="flex items-center gap-3 pt-[5px]">
+                <img src="https://i.pravatar.cc/40?u=${r.id}"
+                     class="w-8 h-8 rounded-full border-2 border-white">
+                <div>
+                  <p class="text-sm font-semibold">User #${r.id}</p>
+                  <p class="text-xs text-black/70">@anonymous</p>
+                </div>
+              </div>
+            </div>
+        </div>
+        `;
+    });
+}
+
+
+// =============================
+// STAR RATING SELECTOR
+// =============================
+const stars = document.querySelectorAll("#starContainer i");
+
+stars.forEach(star => {
+    star.addEventListener("mouseover", () => highlightStars(star.dataset.value));
+    star.addEventListener("mouseleave", () => highlightStars(selectedStars));
+    star.addEventListener("click", () => {
+        selectedStars = parseInt(star.dataset.value);
+        highlightStars(selectedStars);
+    });
+});
+
+function highlightStars(count) {
+    stars.forEach((s, i) => {
+        if (i < count) {
+            s.classList.remove("fa-regular");
             s.classList.add("fa-solid", "text-yellow-400");
-          } else {
+        } else {
             s.classList.remove("fa-solid", "text-yellow-400");
-            s.classList.add("fa-regular", "text-gray-400");
-          }
-        });
-      }
+            s.classList.add("fa-regular");
+        }
+    });
+}
 
-      // ===== SUBMIT BUTTON =====
-      document.getElementById("submitReview").addEventListener("click", () => {
-        const review = document.getElementById("reviewText").value.trim();
-        if (selectedStars === 0)
-          return alert("Please select your star rating!");
-        if (review === "") return alert("Please write a review first!");
+// =============================
+// SUBMIT REVIEW
+// =============================
+document.getElementById("submitReview").addEventListener("click", () => {
 
-        // increase chart data
-        ratingCounts[selectedStars - 1]++;
-        ratingChart.data.datasets[0].data = ratingCounts;
-        ratingChart.update();
+    const review = document.getElementById("reviewText").value.trim();
 
-        // update average rating & count
-        updateAverage();
+    if (selectedStars === 0)
+        return alert("Please select your star rating!");
 
-        // reset form
-        selectedStars = 0;
-        highlightStars(0);
-        document.getElementById("reviewText").value = "";
+    if (review === "")
+        return alert("Please write a review!");
 
-        alert("Thank you for your feedback!");
-      });
+    const formData = new FormData();
+    formData.append("stars", selectedStars);
+    formData.append("review", review);
+
+    fetch("add_review.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(r => r.json())
+    .then(res => {
+        if (res.status === "success") {
+
+            // Refresh stats
+            fetch("get_rating_stats.php")
+                .then(r => r.json())
+                .then(data => {
+                    ratingCounts = data;
+                    updateChart();
+                    updateAverage();
+                });
+
+            // Refresh review cards
+            fetch("get_reviews.php")
+                .then(r => r.json())
+                .then(reviews => renderReviewCards(reviews));
+
+            alert("Thank you for your review!");
+
+            selectedStars = 0;
+            highlightStars(0);
+            document.getElementById("reviewText").value = "";
+        } else {
+            alert("Error: " + res.msg);
+        }
+    });
+});
+
+// =============================
+// UPDATE GRAPH + AVERAGE
+// =============================
+function updateChart() {
+    ratingChart.data.datasets[0].data = ratingCounts;
+    ratingChart.update();
+}
+
+function updateAverage() {
+    const totalReviews = ratingCounts.reduce((a, b) => a + b, 0);
+    const totalStars   = ratingCounts.reduce((sum, count, i) => sum + count * (i+1), 0);
+
+    const avg = totalStars / totalReviews || 0;
+
+    document.getElementById("avgScore").textContent = avg.toFixed(1);
+    document.getElementById("reviewCount").textContent = `${totalReviews} Reviews`;
+
+    const starContainer = document.getElementById("avgStars");
+    starContainer.innerHTML = "";
+
+    for (let i = 1; i <= 5; i++) {
+        starContainer.innerHTML += `
+            <span class="${i <= Math.round(avg) ? "text-yellow-400" : "text-gray-400"} text-xl">★</span>
+        `;
+    }
+}
+
+
+
 
       //Tambahan (feel free to edit/delete dhil)
       // OKE SUWON
