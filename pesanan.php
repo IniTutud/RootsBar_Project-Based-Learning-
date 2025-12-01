@@ -40,7 +40,7 @@ $result = $conn->query("SELECT * FROM orders ORDER BY id DESC");
           <span>Dashboard</span>
         </a>
 
-        <a href="pesanan.html" class="flex items-center gap-3 py-3 px-6 bg-white text-[#1e3a8a] rounded-full font-semibold shadow-md">
+        <a href="pesanan.php" class="flex items-center gap-3 py-3 px-6 bg-white text-[#1e3a8a] rounded-full font-semibold shadow-md">
           <i class="fas fa-shopping-bag"></i>
           <span>Pesanan</span>
         </a>
@@ -74,16 +74,38 @@ $result = $conn->query("SELECT * FROM orders ORDER BY id DESC");
     <div class="flex justify-between items-center px-8 pb-6">
       
       <!-- Tabs Filter -->
-      <div class="flex gap-4">
-        <button class="px-6 py-2 bg-white text-[#1e3a8a] rounded-full font-bold shadow-md">All orders</button>
-        <button class="px-6 py-2 text-white hover:bg-white/10 rounded-full font-semibold transition">Pending</button>
-        <button class="px-6 py-2 text-white hover:bg-white/10 rounded-full font-semibold transition">Completed</button>
-      </div>
+      <div class="flex gap-4" id="orderTabs">
+
+    <button data-status="ALL" class="order-tab px-6 py-2 bg-white text-[#1e3a8a] rounded-full font-bold shadow-md">
+        All orders
+    </button>
+
+    <button data-status="PENDING" class="order-tab px-6 py-2 text-white hover:bg-white/10 rounded-full font-semibold transition">
+        Pending
+    </button>
+
+    <button data-status="ON PROCESS" class="order-tab px-6 py-2 text-white hover:bg-white/10 rounded-full font-semibold transition">
+        On Process
+    </button>
+
+    <button data-status="ON DELIVERY" class="order-tab px-6 py-2 text-white hover:bg-white/10 rounded-full font-semibold transition">
+        On Delivery
+    </button>
+
+    <button data-status="CANCELLED" class="order-tab px-6 py-2 text-white hover:bg-white/10 rounded-full font-semibold transition">
+        Cancelled
+    </button>
+
+    <button data-status="DONE" class="order-tab px-6 py-2 text-white hover:bg-white/10 rounded-full font-semibold transition">
+        Completed
+    </button>
+
+</div>
 
       <!-- Date Picker -->
       <div class="flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/30">
         <i class="fas fa-calendar text-white"></i>
-        <input type="text" placeholder="DD/MM/YY" class="bg-transparent text-white placeholder-gray-300 outline-none w-24 font-semibold">
+         <input id="filterDate" type="date" class="bg-transparent text-white placeholder-gray-300 outline-none w-24 font-semibold">
       </div>
     </div>
 
@@ -106,7 +128,11 @@ $result = $conn->query("SELECT * FROM orders ORDER BY id DESC");
 
 <?php while($row = $result->fetch_assoc()): ?>
 
-  <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a]">
+ <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a] 
+            order-row" 
+     data-status="<?= $row['status'] ?>"
+     data-date="<?= date('Y-m-d', strtotime($row['created_at'])) ?>">
+
       
       <!-- ID -->
       <span class="font-semibold">#<?= $row['id'] ?></span>
@@ -215,6 +241,67 @@ $result = $conn->query("SELECT * FROM orders ORDER BY id DESC");
     }, 300);
   }
 </script>
+
+<script>
+const tabs = document.querySelectorAll(".order-tab");
+const rows = document.querySelectorAll(".order-row");
+
+tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+
+        // HILANGKAN ACTIVE DARI SEMUA TAB
+        tabs.forEach(t => {
+            t.classList.remove("bg-white", "text-[#1e3a8a]", "font-bold", "shadow-md");
+            t.classList.add("text-white");
+        });
+
+        // ACTIVEKAN TAB YANG DIKLIK
+        tab.classList.add("bg-white", "text-[#1e3a8a]", "font-bold", "shadow-md");
+        tab.classList.remove("text-white");
+
+        const status = tab.dataset.status;
+
+        rows.forEach(row => {
+            const rowStatus = row.dataset.status;
+
+            if (status === "ALL" || rowStatus === status) {
+                row.style.display = "grid";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+});
+</script>
+
+<script>
+const dateInput = document.getElementById("filterDate");
+const orderRows = document.querySelectorAll(".order-row");
+
+dateInput.addEventListener("change", function () {
+    const selectedDate = this.value; // format: yyyy-mm-dd
+
+    if (!selectedDate) {
+        orderRows.forEach(r => r.style.display = "grid");
+        return;
+    }
+
+    orderRows.forEach(row => {
+        const rowDateText = row.querySelector(".order-date").innerText.trim(); 
+        const [d, m, y] = rowDateText.split("/"); // dd/mm/yyyy
+
+        const rowDate = `${y}-${m}-${d}`; // ubah ke format yyyy-mm-dd
+
+        if (rowDate === selectedDate) {
+            row.style.display = "grid";
+        } else {
+            row.style.display = "none";
+        }
+    });
+});
+</script>
+
+
 
 </body>
 </html>

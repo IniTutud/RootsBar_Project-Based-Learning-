@@ -4,6 +4,29 @@ if (!isset($_SESSION["admin_id"])) {
     header("Location: LoginAdmin.php");
     exit;
 }
+$query = "SELECT * FROM orders ORDER BY created_at DESC";
+$result = mysqli_query($conn, $query);
+
+$q_products = mysqli_query($conn, "SELECT COUNT(*) AS total FROM products");
+$total_products = mysqli_fetch_assoc($q_products)['total'];
+
+// TOTAL PESANAN BULAN INI
+$q_orders = mysqli_query($conn, "
+    SELECT COUNT(*) AS total 
+    FROM orders 
+    WHERE MONTH(created_at) = MONTH(CURRENT_DATE())
+      AND YEAR(created_at) = YEAR(CURRENT_DATE())
+");
+$total_orders = mysqli_fetch_assoc($q_orders)['total'];
+
+// TOTAL PENDAPATAN BULAN INI
+$q_income = mysqli_query($conn, "
+    SELECT SUM(total) AS total 
+    FROM orders 
+    WHERE MONTH(created_at) = MONTH(CURRENT_DATE())
+      AND YEAR(created_at) = YEAR(CURRENT_DATE())
+");
+$total_income = mysqli_fetch_assoc($q_income)['total'] ?? 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,48 +80,54 @@ if (!isset($_SESSION["admin_id"])) {
     <main class="flex-1 flex flex-col overflow-y-auto">
       <!-- Header -->
       <header class="flex justify-between items-center p-6 bg-[#1e3a8a]">
-        <div class="relative w-96">
-          <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600"></i>
-          <input type="text" placeholder="Cari" class="rounded-full pl-12 pr-4 py-3 text-gray-700 placeholder-gray-500 w-full focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-        <p class="text-xl">Selamat datang, <span class="text-yellow-300 font-bold">sh4rlec!</span></p>
+<div class="relative w-96">
+  <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600"></i>
+  <input id="searchOrder" type="text" placeholder="Cari" 
+         class="rounded-full pl-12 pr-4 py-3 text-gray-700 placeholder-gray-500 w-full focus:outline-none focus:ring-2 focus:ring-blue-400">
+</div>
+
+        <p class="text-xl">Selamat datang, <span class="text-yellow-300 font-bold">Admin!</span></p>
       </header>
 
-      <!-- Stats Cards -->
-      <section class="grid grid-cols-3 gap-6 p-6">
-        <!--Penjualan -->
-        <div class="bg-green-500 p-8 rounded-3xl shadow-xl transform hover:scale-105 transition relative overflow-hidden">
-          <div class="flex justify-between items-start">
-            <div class="z-10">
-              <p class="text-base font-semibold mb-2">Penjualan bulan ini</p>
-              <h2 class="text-5xl font-extrabold">99 Pesanan</h2>
-            </div>
-            <i class="fas fa-chart-line text-7xl opacity-30 absolute right-4 top-6"></i>
-          </div>
-        </div>
+    <section class="grid grid-cols-3 gap-6 p-6">
 
-        <!--Pendapatan -->
-        <div class="bg-yellow-400 p-8 rounded-3xl text-[#1e3a8a] shadow-xl transform hover:scale-105 transition relative overflow-hidden">
-          <div class="flex justify-between items-start">
-            <div class="z-10">
-              <p class="text-base font-bold mb-2">Pendapatan bulan ini</p>
-              <h2 class="text-5xl font-extrabold">Rp. 000.000</h2>
-            </div>
-            <i class="fas fa-dollar-sign text-7xl opacity-30 absolute right-4 top-6"></i>
-          </div>
+    <!-- Penjualan -->
+    <div class="bg-green-500 p-8 rounded-3xl shadow-xl transform hover:scale-105 transition relative overflow-hidden">
+      <div class="flex justify-between items-start">
+        <div class="z-10">
+          <p class="text-base font-semibold mb-2">Penjualan bulan ini</p>
+          <h2 class="text-5xl font-extrabold"><?= $total_orders ?> Pesanan</h2>
         </div>
+        <i class="fas fa-chart-line text-7xl opacity-30 absolute right-4 top-6"></i>
+      </div>
+    </div>
 
-        <!--Total Menu -->
-        <div class="bg-red-500 p-8 rounded-3xl shadow-xl transform hover:scale-105 transition relative overflow-hidden">
-          <div class="flex justify-between items-start">
-            <div class="z-10">
-              <p class="text-base font-semibold mb-2">Total menu produk</p>
-              <h2 class="text-5xl font-extrabold">10 Menu</h2>
-            </div>
-            <i class="fas fa-tag text-7xl opacity-30 absolute right-4 top-6"></i>
-          </div>
+    <!-- Pendapatan -->
+    <div class="bg-yellow-400 p-8 rounded-3xl text-[#1e3a8a] shadow-xl transform hover:scale-105 transition relative overflow-hidden">
+      <div class="flex justify-between items-start">
+        <div class="z-10">
+          <p class="text-base font-bold mb-2">Pendapatan bulan ini</p>
+          <h2 class="text-5xl font-extrabold">
+            Rp. <?= number_format($total_income, 0, ',', '.') ?>
+          </h2>
         </div>
-      </section>
+        <i class="fas fa-dollar-sign text-7xl opacity-30 absolute right-4 top-6"></i>
+      </div>
+    </div>
+
+    <!-- Total Menu -->
+    <div class="bg-red-500 p-8 rounded-3xl shadow-xl transform hover:scale-105 transition relative overflow-hidden">
+      <div class="flex justify-between items-start">
+        <div class="z-10">
+          <p class="text-base font-semibold mb-2">Total menu produk</p>
+          <h2 class="text-5xl font-extrabold"><?= $total_products ?> Menu</h2>
+        </div>
+        <i class="fas fa-tag text-7xl opacity-30 absolute right-4 top-6"></i>
+      </div>
+    </div>
+
+</section>
+
 
       <!-- Recent Orders -->
       <section class="px-6 pb-6 flex-1">
@@ -115,15 +144,57 @@ if (!isset($_SESSION["admin_id"])) {
           </div>
 
           <!-- Orders -->
-          <div class="space-y-3">
-            <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a]">
-              <span class="font-semibold">#4055</span>
-              <span>Fadhil Nawwaf</span>
-              <span>Rp. 20.000</span>
-              <span>04/10/2025</span>
-              <span><span class="bg-green-500 text-white px-5 py-1.5 rounded-full text-xs font-bold inline-block">COMPLETED</span></span>
-              <a href="detailpesanan.html" class="text-blue-300 cursor-pointer hover:text-white transition">Lihat Detail</a>
-            </div>
+         <div class="space-y-3">
+
+<?php while ($row = mysqli_fetch_assoc($result)) : ?>
+
+    <?php
+    // STATUS BADGE
+    $status = strtoupper($row['status']);
+
+    $badgeStyle = [
+        "PENDING"      => "bg-yellow-500",
+        "ON PROCESS"   => "bg-blue-500",
+        "ON DELIVERY"  => "bg-purple-500",
+        "DONE"         => "bg-green-500",
+        "CANCELLED"    => "bg-red-600"
+    ];
+
+    $color = $badgeStyle[$status] ?? "bg-gray-500";
+    ?>
+
+    <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a] order-item">
+
+        <!-- ORDER ID -->
+        <span class="font-semibold">#<?= $row['id'] ?></span>
+
+        <!-- CUSTOMER NAME -->
+        <span><?= $row['first_name'] . " " . $row['last_name'] ?></span>
+
+        <!-- TOTAL PRICE -->
+        <span>Rp.<?= number_format($row['total'], 0, ',', '.') ?></span>
+
+        <!-- DATE -->
+        <span><?= date("d/m/Y", strtotime($row['created_at'])) ?></span>
+
+        <!-- STATUS BADGE -->
+        <span>
+            <span class="<?= $color ?> text-white px-5 py-1.5 rounded-full text-xs font-bold inline-block">
+                <?= $status ?>
+            </span>
+        </span>
+
+        <!-- DETAIL LINK -->
+        <a href="detailpesanan.php?id=<?= $row['id'] ?>"
+           class="text-blue-300 cursor-pointer hover:text-white transition">
+           Lihat Detail
+        </a>
+
+    </div>
+
+<?php endwhile; ?>
+
+</div>
 
           
           </div>
@@ -194,7 +265,29 @@ if (!isset($_SESSION["admin_id"])) {
       window.location.href = "LoginAdmin.html"; // arahkan ke halaman login kamu
     }, 300);
   }
+
+  
 </script>
+
+<script>
+document.getElementById("searchOrder").addEventListener("input", function () {
+
+    const keyword = this.value.toLowerCase();
+    const items = document.querySelectorAll(".order-item");
+
+    items.forEach(item => {
+        // Ambil kolom nama (kolom ke-2)
+        const name = item.children[1].innerText.toLowerCase();
+
+        if (name.includes(keyword)) {
+            item.style.display = "grid";   // tampil
+        } else {
+            item.style.display = "none";   // disembunyikan
+        }
+    });
+});
+</script>
+
 
 </body>
 </html>
