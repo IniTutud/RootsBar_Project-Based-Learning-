@@ -12,6 +12,7 @@ $result = mysqli_query($conn, $query);
   <meta charset="UTF-8" />
   <title>Checkout</title>
   <link rel="stylesheet" href="hhttps://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.1.0/css/all.min.css" />
+  <link rel="shortcut icon" href="Properties/logo.png" type="image/x-icon" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
