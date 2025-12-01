@@ -1,0 +1,329 @@
+<?php
+include "config/db.php";
+
+// AMBIL PRODUK DARI DATABASE
+$query = "SELECT * FROM products";
+$result = mysqli_query($conn, $query);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout</title>
+  <link rel="stylesheet" href="hhttps://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.1.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    @font-face {
+      font-family: "Cooper Black";
+      src: url('CooperBlack.otf');
+    }
+
+    body {
+      font-family: Poppins, sans-serif;
+    }
+
+
+    .service-active {
+      background-color: #CF1F22;
+      color: white !important;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body class="bg-[#102F76] py-[30px] md:overflow-hidden">
+
+  <div class="w-[95%] max-w-[1250px] mx-auto grid grid-cols-1 lg:grid-cols-2
+ gap-8">
+
+    <!-- LEFT SIDE: Shipping Address + Service Option -->
+    <div class="space-y-8">
+
+      <!-- SHIPPING ADDRESS -->
+      <div class="bg-[#F7EEDB] rounded-2xl p-8 shadow-lg border-4 border-[#EFDFBF]">
+        <h2
+          class="text-2xl md:text-2xl font-bold mb-6 text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76] border-b-[2px] border-[#CF1F22] w-[210px] md:w-[180px] pb-[4px] whitespace-nowrap"
+          style="font-family:'Cooper Black'">
+          Shipping Address
+        </h2>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm text-[#F6D932] font-semibold drop-shadow-[2px_2px_0px_#102F76]">First Name</label>
+            <input
+              class="w-full mt-1 p-3 rounded-xl border-2 border-[#102F76] bg-[#f7eedb] drop-shadow-[2px_2px_0px_#102F76] shadow-md" />
+          </div>
+
+          <div>
+            <label class="text-sm text-[#F6D932] font-semibold drop-shadow-[2px_2px_0px_#102F76] ">Last Name</label>
+            <input
+              class="w-full mt-1 p-3 rounded-xl border-2 border-[#102F76] bg-[#f7eedb] drop-shadow-[2px_2px_0px_#102F76] shadow-md" />
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <label class="text-sm text-[#F6D932] font-semibold drop-shadow-[2px_2px_0px_#102F76]">Phone Number</label>
+          <input
+            class="w-full mt-1 p-3 rounded-xl border-2 border-[#102F76] bg-[#f7eedb] drop-shadow-[2px_2px_0px_#102F76] shadow-md" />
+        </div>
+
+        <div class="mt-4">
+          <label class="text-sm text-[#F6D932] font-semibold drop-shadow-[2px_2px_0px_#102F76]">Address</label>
+          <textarea
+            class="w-full mt-1 p-3 rounded-xl border-2 border-[#102F76] bg-[#f7eedb] h-20 drop-shadow-[2px_2px_0px_#102F76] box-shadow shadow-lg"></textarea>
+        </div>
+      </div>
+
+      <!-- SERVICES OPTION (now under Shipping Address!) -->
+      <div class="bg-[#F7EEDB] rounded-2xl px-8 pt-8 shadow-lg border-4 border-[#EFDFBF]">
+        <div class="flex justify-between items-center mb-6">
+          <h2
+            class="text-xl font-bold text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76] border-b-[2px] border-[#CF1F22] w-[80px] md:w-[150px] pb-[4px] "
+            style="font-family:'Cooper s'">
+            Services Option
+          </h2>
+
+          <div class="flex gap-4">
+            <button id="btnDelivery"
+              class="service-btn w-[140px] h-[110px] rounded-xl border-[3px] border-[#CF1F22] text-[#CF1F22] flex flex-col items-center justify-center font-bold gap-2">
+              <i class="fa-solid fa-truck-fast" style="font-size: 30px"></i>
+              Delivery
+            </button>
+
+            <button id="btnPickup"
+              class="service-btn w-[140px] h-[110px] rounded-xl border-[3px] border-[#CF1F22] text-[#CF1F22] flex flex-col items-center justify-center font-bold gap-2">
+              <i class="fa-solid fa-hand-holding" style="font-size: 30px"></i>
+              Pickup
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ORDER SUMMARY -->
+    <div class="bg-[#F7EEDB] rounded-2xl p-8 shadow-lg border-4 border-[#EFDFBF] h-full">
+
+      <div class="flex flex-col justify-between h-full">
+
+        <!-- BAGIAN ATAS -->
+        <div>
+          <h2
+            class="text-2xl font-bold mb-6 text-[#F6D932] drop-shadow-[2px_2px_0px_#102F76] border-b-[2px] border-[#CF1F22] w-[190px] md:w-[190px] pb-[4px] whitespace-nowrap"
+            style="font-family:'Cooper Black'">Order Summary</h2>
+
+          <!-- ITEM-LIST: flex-grow bikin dia ngambil ruang -->
+          <div id="summaryItems" class="space-y-5 flex-grow">
+            <div class="flex gap-4 items-center">
+              <img src="Properties/Menu_Section/choco_choco.png" class="w-20 rounded-xl">
+              <div>
+                <p class="text-[#f6d932] font-bold text-lg drop-shadow-[2px_2px_0px_#102F76]">Choco + Choco</p>
+                <p class=" font-bold text-white drop-shadow-[2px_2px_0px_#102F76] text-md">Rp. 20.000</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-center">
+              <img src="Properties/Menu_Section/choco_choco.png" class="w-20 rounded-xl">
+              <div>
+                <p class="text-[#f6d932] font-bold text-lg drop-shadow-[2px_2px_0px_#102F76]">Choco + Choco</p>
+                <p class="font-bold text-white drop-shadow-[2px_2px_0px_#102F76] text-md">Rp. 20.000</p>
+              </div>
+            </div>
+
+
+            <div class="b] my-4"></div>
+          </div>
+
+          <!-- BAGIAN BAWAH -->
+          <div>
+            <div class="flex justify-between text-white text-sm font-semibold drop-shadow-[2px_2px_0px_#102F76]">
+              <span>Subtotal</span>
+              <span id="subtotal" class="text-[#F6D932]">Rp.0</span>
+            </div>
+
+            <div class="flex justify-between text-white text-sm font-semibold mt-1 drop-shadow-[2px_2px_0px_#102F76]">
+              <span>Shipping</span>
+              <span id="shipping" class="text-[#F6D932]">Rp.5.000</span>
+            </div>
+
+            <div class="border-t-2 border-[#CF1F22] my-4"></div>
+
+            <div class="flex justify-between text-white text-lg font-bold mb-4 drop-shadow-[2px_2px_0px_#102F76]">
+              <span>Total</span>
+              <span id="total" class="text-[#F6D932]">Rp.0</span>
+            </div>
+
+            <button id="placeOrderBtn"
+              class="w-full bg-[#F6D932] text-[#0a2458] font-bold py-4 rounded-xl text-lg shadow-md hover:scale-[1.03] transition">
+              Place Order
+            </button>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+  <img src="Properties/checker_3.png" alt="Checkerboard" class="w-[1900px] md:w-full bottom-0 mt-[20px] mb-0" />
+
+
+
+  <!-- ================= JS LOAD CHECKOUT DATA ================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+
+    const cart = JSON.parse(localStorage.getItem("cartData") || "[]");
+    const summary = document.getElementById("summaryItems");
+    summary.innerHTML = "";
+
+    let subtotal = 0;
+    const shipping = 5000;
+
+    // Render tiap item
+    for (const item of cart) {
+        const sub = item.price * item.qty;
+        subtotal += sub;
+
+        let image = "Properties/Menu_Section/choco_choco.png"; // fallback
+
+        try {
+            const res = await fetch(`get_product_image.php?id=${item.id}`);
+            const data = await res.json();
+
+            if (data && data.img) {
+                image = data.img; // gambar asli dari DB
+            }
+        } catch (e) {
+            console.log("fetch error:", e);
+        }
+
+        summary.innerHTML += `
+            <div class="flex gap-4 items-center mb-4">
+                <img src="${image}" class="w-20 h-20 object-cover rounded-xl">
+                <div>
+                    <p class="text-[#f6d932] font-bold text-lg drop-shadow-[2px_2px_0px_#102F76]">
+                        ${item.name} × ${item.qty}
+                    </p>
+                    <p class="font-bold text-white drop-shadow-[2px_2px_0px_#102F76]">
+                        Rp.${sub.toLocaleString("id-ID")}
+                    </p>
+                </div>
+            </div>
+        `;
+    }
+
+    // UPDATE TOTAL
+    document.getElementById("subtotal").innerText = "Rp." + subtotal.toLocaleString("id-ID");
+    document.getElementById("shipping").innerText = "Rp." + shipping.toLocaleString("id-ID");
+    document.getElementById("total").innerText = "Rp." + (subtotal + shipping).toLocaleString("id-ID");
+
+    // buat payload order
+    window.checkoutData = {
+        cart,
+        subtotal,
+        shipping,
+        total: subtotal + shipping
+    };
+});
+
+
+// ===================== SERVICE BUTTONS =====================
+let selectedService = "delivery";
+
+const btnDelivery = document.getElementById("btnDelivery");
+const btnPickup = document.getElementById("btnPickup");
+
+function updateServiceButtons() {
+    document.querySelectorAll(".service-btn").forEach(btn => {
+        btn.classList.remove("service-active");
+    });
+
+    if (selectedService === "delivery") {
+        btnDelivery.classList.add("service-active");
+    } else {
+        btnPickup.classList.add("service-active");
+    }
+}
+
+btnDelivery.onclick = () => { selectedService = "delivery"; updateServiceButtons(); };
+btnPickup.onclick = () => { selectedService = "pickup"; updateServiceButtons(); };
+
+updateServiceButtons();
+
+
+// ===================== PLACE ORDER =====================
+document.getElementById("placeOrderBtn").addEventListener("click", async () => {
+
+    const inputs = document.querySelectorAll("input, textarea");
+
+    const first = inputs[0].value.trim();
+    const last  = inputs[1].value.trim();
+    const phone = inputs[2].value.trim();
+    const addr  = inputs[3].value.trim();
+
+    if (!first || !last || !phone || !addr) {
+        alert("Isi semua data terlebih dahulu!");
+        return;
+    }
+
+    const payload = {
+        first_name: first,
+        last_name: last,
+        phone,
+        address: addr,
+        service_type: selectedService,
+        subtotal: checkoutData.subtotal,
+        shipping: checkoutData.shipping,
+        total: checkoutData.total,
+        items: checkoutData.cart
+    };
+
+    const res = await fetch("process_order.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(payload)
+    });
+
+    const out = await res.json();
+
+    if (out.status === "success") {
+        alert("Order berhasil dibuat!");
+        localStorage.removeItem("cartData");
+        window.location.href = "index.php";
+    } else {
+        alert("Gagal: " + out.message);
+    }
+});
+</script>
+
+
+
+
+
+
+</body>
+
+</html>

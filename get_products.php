@@ -1,32 +1,25 @@
 <?php
-include "config/db.php";
+require "config/db.php";
 
-if (!isset($_GET["category"])) {
-    echo json_encode([]);
-    exit;
-}
+$category = $_GET["category"] ?? "";
 
-$cat = $_GET["category"];
-
-// Samakan format CATEGORY agar selalu UPPERCASE
-$cat = strtoupper($cat);
-
-// Ambil produk sesuai kategori
-$sql = "SELECT * FROM products WHERE UPPER(category) = '$cat'";
-$q = mysqli_query($conn, $sql);
+$stmt = $conn->prepare("SELECT id, name, price, img, description, ingredients 
+                        FROM products 
+                        WHERE category = ?");
+$stmt->bind_param("s", $category);
+$stmt->execute();
+$res = $stmt->get_result();
 
 $data = [];
-while ($row = mysqli_fetch_assoc($q)) {
+while ($row = $res->fetch_assoc()) {
     $data[] = [
-        "id" => $row["id"],
+        "id" => $row["id"],                    // <-- INI YG PALING PENTING
         "name" => $row["name"],
-        "price" => $row["price"],
+        "price" => intval($row["price"]),
         "img" => $row["img"],
         "description" => $row["description"],
-        // INGREDIENTS itu GAMBAR SATUAN — bukan array
-        "ingredients" => [$row["ingredients"]]
+        "ingredients" => json_decode($row["ingredients"], true) ?: []
     ];
 }
 
 echo json_encode($data);
-?>

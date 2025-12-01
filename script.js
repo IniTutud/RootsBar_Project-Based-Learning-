@@ -97,8 +97,8 @@ function renderReviewCards(reviews) {
 
         container.innerHTML += `
         <div
-            class="bg-[url('Properties/Menu_Section/paper.png')] bg-cover bg-no-repeat text-black rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 pb-40 relative transition-transform duration-300 hover:scale-[1.03] border-4"
-            style="transform: rotate(${rotate}deg) translateY(${offsetY}px);"
+            class="bg-[url('Properties/Menu_Section/paper.png')] bg-cover bg-no-repeat text-black rounded-2xl shadow-xl w-[280px] sm:w-[300px] p-6 pb-40 relative transition-transform duration-300 hover:scale-[1.04] hover:-translate-y-1 hover:rotate-0"
+            style="transform: rotate(${rotate}deg) translateY(${offsetY}px); "
         >
 
         <img src="Properties/Menu_Section/clip.png"
@@ -432,52 +432,80 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      function addToCart() {
-        const popup = document.getElementById("menuPopup");
-        const name = popup.dataset.name;
-        const price = parseInt(popup.dataset.price);
+     function addToCart() {
+    const popup = document.getElementById("menuPopup");
+    const name = popup.dataset.name;
+    const price = parseInt(popup.dataset.price);
+    const productId = popup.dataset.productId;
 
-        const tbody = document.querySelector("#cartPopup tbody");
+    const tbody = document.querySelector("#cartPopup tbody");
 
-        const existingRow = Array.from(tbody.querySelectorAll("tr")).find(
-          (row) => row.querySelector("label").textContent.trim() === name
-        );
+    const existingRow = Array.from(tbody.querySelectorAll("tr")).find(
+      (row) => row.querySelector("label").textContent.trim() === name
+    );
 
-        if (existingRow) {
-          const qtyCell = existingRow.querySelector(".jumlah");
-          const newQty = parseInt(qtyCell.textContent) + 1;
-          qtyCell.textContent = newQty;
-          existingRow.querySelector(".item-check").dataset.qty = newQty;
-        } else {
-          const row = document.createElement("tr");
-          row.innerHTML = `
+    if (existingRow) {
+        const qtyCell = existingRow.querySelector(".jumlah");
+        const newQty = parseInt(qtyCell.textContent) + 1;
+
+        qtyCell.textContent = newQty;
+        const cb = existingRow.querySelector(".item-check");
+        cb.dataset.qty = newQty;
+        cb.dataset.productId = productId;
+    } else {
+        const row = document.createElement("tr");
+        row.innerHTML = `
             <td>
               <label class="custom-checkbox">
-                <input type="checkbox" class="item-check" data-price="${price}" data-qty="1" checked>
+                <input type="checkbox" class="item-check" 
+                    data-price="${price}" 
+                    data-qty="1"
+                    data-product-id="${productId}"
+                    checked>
                 <span class="checkmark"></span>
                 ${name}
               </label>
             </td>
             <td class="price">Rp.${price.toLocaleString("id-ID")}</td>
             <td class="jumlah" style="text-align:center">1</td>
-            <td class="subtotal" style="text-align:right">Rp.${price.toLocaleString(
-              "id-ID"
-            )}</td>
+            <td class="subtotal" style="text-align:right">Rp.${price.toLocaleString("id-ID")}</td>
             <td class="remove"><span class="remove-item">×</span></td>
-          `;
-          tbody.appendChild(row);
-        }
+        `;
+        tbody.appendChild(row);
+    }
 
-        calculateTotal();
-        updateSelectAllStatus();
-        attachEvents();
+    calculateTotal();
+    updateSelectAllStatus();
+    attachEvents();
+    saveCartToLocalStorage();
 
-        const count = document.querySelectorAll(".item-check").length;
-        document.querySelector(".small-grey").textContent = `(${count})`;
+    const count = document.querySelectorAll(".item-check").length;
+    document.querySelector(".small-grey").textContent = `(${count})`;
 
-        toggleMenuPopup();
-        showCartNotif(name);
-      }
+    toggleMenuPopup();
+    showCartNotif(name);
+}
+
+      
+
+      function saveCartToLocalStorage() {
+    const items = [];
+
+    document.querySelectorAll("#cartPopup tbody tr").forEach(row => {
+        const cb = row.querySelector(".item-check");
+        if (!cb) return;
+
+        items.push({
+            product_id: cb.dataset.productId || 0,
+            name: row.querySelector("label").textContent.trim(),
+            price: parseInt(cb.dataset.price),
+            qty: parseInt(cb.dataset.qty)
+        });
+    });
+
+    localStorage.setItem("cartData", JSON.stringify(items));
+}
+
 
       renderMenu("ASINAN");
 

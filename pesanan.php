@@ -1,3 +1,10 @@
+<?php
+require "config/db.php";
+
+// ambil semua orders
+$result = $conn->query("SELECT * FROM orders ORDER BY id DESC");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,23 +102,52 @@
         </div>
 
         <!-- Table Body -->
-        <div class="space-y-3">
+       <div class="space-y-3">
 
-          <!-- Order 1 -->
-          <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a]">
-            <span class="font-semibold">#4055</span>
-            <span>Fadhil Nawwaf</span>
-            <span>Rp. 20.000</span>
-            <span>04/10/2025</span>
-            <span>
-              <span class="bg-green-500 text-white px-5 py-1.5 rounded-full text-xs font-bold inline-block">COMPLETED</span>
-            </span>
-             <!-- LINK DETAIL -->
-           <a href="detailpesanan.php" class="text-blue-300 cursor-pointer hover:text-white transition">
-            Lihat Detail
-     </a>
-      </div>
-        </div>
+<?php while($row = $result->fetch_assoc()): ?>
+
+  <div class="grid grid-cols-6 gap-4 items-center text-sm p-4 rounded-xl border-2 border-white/30 bg-[#1e3a8a]">
+      
+      <!-- ID -->
+      <span class="font-semibold">#<?= $row['id'] ?></span>
+
+      <!-- NAME -->
+      <span><?= $row['first_name'] . " " . $row['last_name'] ?></span>
+
+      <!-- TOTAL PRICE -->
+      <span>Rp. <?= number_format($row['total'], 0, ',', '.') ?></span>
+
+      <!-- DATE -->
+      <span><?= date("d/m/Y", strtotime($row['created_at'])) ?></span>
+
+      <!-- STATUS -->
+      <span>
+        <?php
+          $status = $row['status'];
+          $color = "bg-gray-500";
+
+          if ($status == "PENDING") $color = "bg-yellow-500";
+          if ($status == "ON PROCESS") $color = "bg-blue-500";
+          if ($status == "ON DELIVERY") $color = "bg-purple-500";
+          if ($status == "DONE") $color = "bg-green-500";
+        ?>
+        <span class="<?= $color ?> text-white px-5 py-1.5 rounded-full text-xs font-bold inline-block">
+          <?= $status ?>
+        </span>
+      </span>
+
+      <!-- DETAIL BUTTON -->
+      <a href="detailpesanan.php?id=<?= $row['id'] ?>" 
+         class="text-blue-300 hover:text-white transition font-semibold">
+        Lihat Detail
+      </a>
+
+  </div>
+
+<?php endwhile; ?>
+
+</div>
+
 
       </div>
     </section>
