@@ -312,7 +312,7 @@ document.getElementById("placeOrderBtn").addEventListener("click", async () => {
     if (out.status === "success") {
         alert("Order berhasil dibuat!");
         localStorage.removeItem("cartData");
-        window.location.href = "index.php";
+        window.location.href = "payment_direct.php";
     } else {
         alert("Gagal: " + out.message);
     }

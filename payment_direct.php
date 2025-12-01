@@ -36,6 +36,7 @@
     </h1>
 
     <!-- QRIS Card -->
+    <a href="payment.php">
     <div 
       class="bg-[#F1E9D4] w-64 h-64 rounded-3xl flex items-center justify-center cursor-pointer
              shadow-xl transition-transform duration-300 hover:scale-105 animate-pop mx-auto items-center justify-center">
@@ -43,7 +44,7 @@
       <img src="Properties/Payment/qris.png" alt="QRIS" class="w-32">
       <!-- ganti your-qris-icon.png dengan path gambar lu -->
 
-    </div>
+    </div></a>
 
   </div>
 
