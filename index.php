@@ -291,7 +291,7 @@ while ($row = $result->fetch_assoc()) {
   </div>
 
   <section
-    class="min-h-[315px] sm:min-h-[550px] md:min-h-[310px] bg-no-repeat mx-auto bg-[url('/Properties/Order_Via_Section/checkered_phone.png')] bg-contain bg-top md:bg-[url('/Properties/Order_Via_Section/checkered_red.png')] md:bg-cover md:bg-center">
+    class="min-h-[315px] sm:min-h-[550px] md:min-h-[310px] bg-no-repeat mx-auto bg-[url('Properties/Order_Via_Section/checkered_phone.png')] bg-contain bg-top md:bg-[url('Properties/Order_Via_Section/checkered_red.png')] md:bg-cover md:bg-center">
     <div class="mx-auto">
       <!-- Judul -->
       <h2
