@@ -22,20 +22,20 @@ if (!empty($_FILES['image']['name'])) {
 // ========== UPLOAD INGREDIENTS (gambar) ==========
 $ingredientFiles = [];
 
-foreach ($_FILES["ingredients"]["name"] as $index => $name) {
+if (!empty($_FILES["ingredients"]["name"])) {
 
-    if ($name === "") continue; // skip kosong
-
-    $filename = time() . "_ING_" . basename($name);
+    $fileName = basename($_FILES["ingredients"]["name"]);
+    $filename = time() . "_ING_" . $fileName;
     $target = "uploads/" . $filename;
 
-    if (move_uploaded_file($_FILES["ingredients"]["tmp_name"][$index], $target)) {
-        $ingredientFiles[] = $target;
+    if (move_uploaded_file($_FILES["ingredients"]["tmp_name"], $target)) {
+        $ingredientFiles[] = $target; // tetap simpan dalam array biar konsisten format JSON
     }
 }
 
-// Simpan KE DATABASE DALAM BENTUK JSON
 $ingredientsPath = json_encode($ingredientFiles);
+
+
 
 
 // ========== MASUK DB ==========

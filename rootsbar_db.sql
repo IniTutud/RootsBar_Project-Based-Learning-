@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2025 at 05:51 AM
+-- Generation Time: Dec 10, 2025 at 06:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -60,6 +60,15 @@ CREATE TABLE `orders` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `first_name`, `last_name`, `phone`, `address`, `service_type`, `status`, `subtotal`, `shipping`, `total`, `created_at`) VALUES
+(13, 'hehe', 'hay', 'pp', 'aa', 'pickup', 'DONE', 900000, 5000, 905000, '2025-12-01 04:55:56'),
+(14, 'hahaha', 'haha', '098778900', 'jl. jojoran 1 no 20', 'pickup', 'PENDING', 2147483647, 5000, 2147483647, '2025-12-04 00:57:11'),
+(15, 'Dhefano', 'Seandy', '081335662944', 'Jl. Jojoran 1 no 20', 'delivery', 'ON PROCESS', 27000, 5000, 32000, '2025-12-04 03:27:38');
+
 -- --------------------------------------------------------
 
 --
@@ -97,7 +106,10 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `qty`, `price`, `subt
 (15, 9, 0, 1, 16000, 16000),
 (16, 10, 0, 1, 99000, 99000),
 (17, 11, 0, 1, 99000, 99000),
-(18, 12, 0, 1, 900000, 900000);
+(18, 12, 0, 1, 900000, 900000),
+(19, 13, 0, 1, 900000, 900000),
+(20, 14, 0, 1, 2147483647, 2147483647),
+(21, 15, 0, 1, 27000, 27000);
 
 -- --------------------------------------------------------
 
@@ -112,7 +124,7 @@ CREATE TABLE `products` (
   `price` int(11) NOT NULL,
   `img` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `ingredients` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+  `ingredients` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -120,9 +132,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `category`, `price`, `img`, `description`, `ingredients`) VALUES
-(6, 'samtingbautcyu', 'Golden Fil', 900000, 'uploads/1763963089_desktop-wallpaper-based-on-the-album-cover-v0-axnmwxmdw7a91.jpeg', 'hahahaha', '[]'),
-(7, 'hhh', 'Manisan', 16000, 'uploads/1763963191_IMG_20250625_011142.jpg', 'miss', 'uploads/1763963191_ING_1183C102_001_SR_RT_GLB.png'),
-(8, 'hai', 'Asinan', 99000, 'uploads/1763963222_WIN_20250723_07_14_08_Pro.jpg', 'yo', '[]');
+(32, 'Beef + Patties', 'Asinan', 27000, 'uploads/1764815813_image.png', 'Roti Bakar Beef + Patties adalah roti tebal yang dibakar hingga renyah di luar namun tetap lembut di dalam, berisi sliced beef gurih dan patty daging sapi yang juicy dengan aroma panggangan yang khas, lalu dipadukan dengan saus creamy seperti mayo atau keju yang meleleh sehingga menghasilkan perpaduan rasa smoky, savory, dan creamy dalam satu gigitan yang bikin kenyang sekaligus nagih.', '[\"uploads/1764815813_ING_2.png\"]'),
+(33, 'Choco + Choco', 'Manisan', 15000, 'uploads/1764815890_l.png', 'Roti Bakar Choco + Choco adalah roti manis yang dipanggang hingga permukaannya hangat dan sedikit crispy, lalu diberi kombinasi dua jenis cokelat—biasanya selai cokelat yang creamy dan lelehan cokelat tambahan yang lebih pekat—yang meleleh bersama dan menciptakan rasa manis, rich, dan indulgent, bikin setiap gigitan berasa seperti dessert cokelat yang super memanjakan.', '[\"uploads/1764815890_ING_coco.png\"]');
 
 -- --------------------------------------------------------
 
@@ -142,15 +153,16 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `stars`, `review`, `created_at`) VALUES
-(1, 5, 'HAI', '2025-11-26 14:29:43'),
-(2, 5, 'AKU CINTA KAMU', '2025-11-26 14:29:57'),
-(3, 1, 'MMMM', '2025-11-26 14:32:04'),
-(4, 5, 'KAKAKA', '2025-11-26 14:32:12'),
-(5, 2, 'memeg', '2025-11-26 14:56:01'),
-(6, 3, 'haiiii', '2025-11-26 14:56:17'),
-(7, 4, 'konkontolno', '2025-11-26 14:56:47'),
-(8, 4, 'kon memeg no', '2025-11-26 14:57:08'),
-(9, 5, 'aku cinta dia dan hanya dia', '2025-11-30 04:59:45');
+(10, 5, 'enak', '2025-12-04 02:51:23'),
+(11, 4, 'enak^2', '2025-12-04 02:51:41'),
+(12, 2, 'roti nya keras dikit', '2025-12-04 02:51:59'),
+(13, 5, 'enak', '2025-12-04 02:52:08'),
+(14, 3, 'enak tapi diare dikit', '2025-12-04 02:52:20'),
+(15, 1, 'parkirnya susah', '2025-12-04 02:52:31'),
+(16, 5, 'free sweet orange', '2025-12-04 02:53:10'),
+(17, 5, 'free sempol sak kresek', '2025-12-04 02:53:19'),
+(18, 2, 'sekolah e mambu', '2025-12-04 02:53:31'),
+(19, 5, 'enak', '2025-12-04 03:46:26');
 
 --
 -- Indexes for dumped tables
@@ -201,25 +213,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

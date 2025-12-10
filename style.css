@@ -776,7 +776,11 @@ input[type=checkbox] {
   background-position: center;
 }
 
-
+.ingredients-list img {
+    width: 700px;
+    height: 70px;
+    object-fit: contain;
+}
 
 /* Checkerboard bawah */
 .checkerboard {

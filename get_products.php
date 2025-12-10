@@ -12,13 +12,31 @@ $res = $stmt->get_result();
 
 $data = [];
 while ($row = $res->fetch_assoc()) {
+
+    // Ambil raw ingredients dari DB
+    $rawIng = $row["ingredients"];
+
+    // Normalisasi ingredients jadi ARRAY
+    if (!$rawIng || $rawIng === "null" || $rawIng === "") {
+        $ingredients = [];
+    } else {
+        $decoded = json_decode($rawIng, true);
+
+        // Kalau gagal decode = kemungkinan JSON rusak
+        if (!is_array($decoded)) {
+            $ingredients = [];
+        } else {
+            $ingredients = $decoded;
+        }
+    }
+
     $data[] = [
-        "id" => $row["id"],                    // <-- INI YG PALING PENTING
+        "id" => $row["id"],
         "name" => $row["name"],
         "price" => intval($row["price"]),
         "img" => $row["img"],
         "description" => $row["description"],
-        "ingredients" => json_decode($row["ingredients"], true) ?: []
+        "ingredients" => $ingredients
     ];
 }
 

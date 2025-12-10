@@ -410,10 +410,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const ingContainer = document.getElementById("popupIngredients");
           ingContainer.innerHTML = item.ingredients
-            .map(
-              (src) => `<div class="ingredient-item"><img src="${src}"></div>`
-            )
-            .join("");
+            ingContainer.innerHTML = item.ingredients
+  .map(
+    src => `
+      <div class="ingredient-item">
+        <img src="${src}" style="width:100px !important; height:100px !important; object-fit:contain;">
+      </div>
+    `
+  )
+  .join("");
+
 
           setTimeout(() => {
             const title = document.getElementById("popupTitle");

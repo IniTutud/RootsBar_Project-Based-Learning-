@@ -303,7 +303,7 @@ while ($row = $result->fetch_assoc()) {
       <div
         class="flex justify-center md:gap-[18px] gap-[10px] mt-[-12px] md:relative md:right-0 md:bottom-[100px] md:left-[250px]">
         <!-- Item -->
-        <a href="#" target="_blank"
+        <a href="http://wa.me/+62831-3444-6901" target="_blank"
           class="bg-[#F6D932] w-[65px] h-[65px] sm:w-24 sm:h-[130px] sm:w-[130px] md:w-[200px] md:h-[100px] rounded-[25px] flex items-center justify-center shadow-[0_4px_5px_rgba(0,0,0,0.25)] hover:scale-105 transition">
           <img src="Properties/Order_Via_Section/whatsapp.png" alt="WhatsApp" class="w-[30px] sm:w-12" />
         </a>
@@ -427,7 +427,7 @@ while ($row = $result->fetch_assoc()) {
           Jl. Jojoran Gang 1 No. 20, Surabaya
         </p>
 
-        <a href="https://maps.app.goo.gl/XXXX" target="_blank"
+        <a href="https://maps.app.goo.gl/6PVPAKsmaMhAxMFC8" target="_blank"
           class="bg-[#f9dd3c] text-[#CF1F22] title-font font-extrabold text-sm md:text-base px-6 py-2 rounded-full shadow-md hover:translate-y-[-2px] hover:bg-[#ffe041] transition-all duration-200 inline-block relative">
           GET LOCATION
         </a>
